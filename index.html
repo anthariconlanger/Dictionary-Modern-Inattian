@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>伊纳特语词典 · Modern Inattian Dictionary</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header__title">
+    <h1>伊纳特语词典</h1>
+    <p class="site-header__subtitle">Modern Inattian Dictionary</p>
+  </div>
+
+  <div class="search-box">
+    <input
+      id="search-input"
+      type="search"
+      placeholder="搜索词条 · Modern Inattian / 中文 / English / Español"
+      autocomplete="off"
+    >
+  </div>
+</header>
+
+<nav id="alphabet-nav" class="alphabet-nav" aria-label="按首字母筛选"></nav>
+
+<main id="app-main">
+  <div id="breadcrumb" class="breadcrumb" hidden></div>
+  <div id="status-banner" class="status-banner" hidden></div>
+  <div id="entry-list" class="entry-list"></div>
+  <div id="entry-detail" class="entry-detail" hidden></div>
+</main>
+
+<footer class="site-footer">
+  <p>词典数据由本地 JSON 源文件与 <code>make_index.py</code> 自动生成 · 页面为只读静态词典阅读器</p>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
