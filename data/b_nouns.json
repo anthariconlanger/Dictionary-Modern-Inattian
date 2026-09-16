@@ -1,4 +1,44 @@
- [
+[
   {
-},
+    "id": "n-baba",
+    "word": "baba",
+    "pos": "n",
+    "translations": {
+      "zh": "奶奶、阿嬷",
+      "en": "grandma",
+      "es": "abuela, nona"
+    },
+    "gender": "common",
+    "declension": {
+      "单数": { "主格": "baba", "属格": "babu", "宾格": "baba" },
+      "复数": { "主格": "babe", "属格": "babu", "宾格": "babas" }
+    },
+    "conjugation": {},
+    "etymology": [],
+    "examples": [],
+    "synonyms": [],
+    "antonyms": [],
+    "tags": ["家庭", "亲属关系"]
+  },
+  {
+    "id": "n-bisbaxil",
+    "word": "bisbaxil",
+    "pos": "n",
+    "translations": {
+      "zh": "蝙蝠",
+      "en": "bat (animal)",
+      "es": "murciélago (animal)"
+    },
+    "gender": "neutral",
+    "declension": {
+      "单数": { "主格": "bisbaxil", "属格": "bisbaxilŭs", "宾格": "aleska" },
+      "复数": { "主格": "bisbaxila", "属格": "bisbaxilŭ", "宾格": "bisbaxila" }
+    },
+    "conjugation": {},
+    "etymology": [],
+    "examples": [],
+    "synonyms": [],
+    "antonyms": [],
+    "tags": ["动物"]
+  }
 ]
