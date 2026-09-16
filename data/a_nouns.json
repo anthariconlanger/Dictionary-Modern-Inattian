@@ -1,56 +1,55 @@
 [
   {
-    "id": "n-amara",
-    "word": "amara",
+    "id": "n-apatiga",
+    "word": "apatiga",
     "pos": "n",
     "translations": {
-      "zh": "海",
-      "en": "sea",
-      "es": "mar"
+      "zh": "爱",
+      "en": "love",
+      "es": "amor"
     },
     "gender": "common",
     "declension": {
-      "单数": { "主格": "amara", "属格": "amarai", "宾格": "amaram" },
-      "复数": { "主格": "amarai", "属格": "amaraum", "宾格": "amaras" }
+      "单数": { "主格": "apatiga", "属格": "apatiger", "宾格": "apatiga" },
+      "复数": { "主格": "apatige", "属格": "apatigu", "宾格": "apatigas" }
     },
     "conjugation": {},
     "etymology": [
-      { "part": "am-", "meaning": "水、湿润" },
-      { "part": "-ara", "meaning": "广阔之物（名词后缀）" }
+      { "part": "apa-", "meaning": "向、往" },
+      { "part": "-tig-", "meaning": "遮住、保护（动词后缀）" },
+      { "part": "-a", "meaning": "名词后缀"}
     ],
     "examples": [
       {
-        "Modern Inattian": "Amara nigra est.",
-        "zh": "大海是深色的。",
-        "en": "The sea is dark.",
-        "es": "El mar es oscuro."
+        "Modern Inattian": "ă apatiga je ber.",
+        "zh": "爱是很好的。",
+        "en": "The love is good.",
+        "es": "El amor es bueno."
       }
     ],
-    "synonyms": ["pelagos"],
-    "antonyms": ["terra"],
-    "tags": ["自然", "地理"]
+    "synonyms": [],
+    "antonyms": [],
+    "tags": ["人性", "情感"]
   },
   {
-    "id": "adj-nigra",
-    "word": "nigra",
-    "pos": "adj",
+    "id": "n-aleska",
+    "word": "aleska",
+    "pos": "n",
     "translations": {
-      "zh": "黑色的，深色的",
-      "en": "dark, black",
-      "es": "oscuro"
+      "zh": "医生",
+      "en": "doctor",
+      "es": "doctor"
     },
-    "gender": "neutral",
+    "gender": "common",
     "declension": {
-      "单数": { "主格": "nigra", "属格": "nigrai", "宾格": "nigram" },
-      "复数": { "主格": "nigrai", "属格": "nigraum", "宾格": "nigras" }
+      "单数": { "主格": "aleska", "属格": "alesker", "宾格": "aleska" },
+      "复数": { "主格": "aleske", "属格": "alesku", "宾格": "aleskas" }
     },
     "conjugation": {},
-    "etymology": [
-      { "part": "nigr-", "meaning": "黑、暗" }
-    ],
+    "etymology": [],
     "examples": [],
-    "synonyms": ["obscura"],
-    "antonyms": ["alba"],
-    "tags": ["颜色"]
+    "synonyms": [],
+    "antonyms": [],
+    "tags": ["救治"]
   }
 ]
