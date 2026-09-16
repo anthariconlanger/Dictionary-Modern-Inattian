@@ -1,0 +1,83 @@
+[
+  {
+    "id": "v-amare",
+    "word": "amare",
+    "pos": "v",
+    "translations": {
+      "zh": "爱，喜爱",
+      "en": "to love",
+      "es": "amar"
+    },
+    "root": "am",
+    "conj_pattern": "I",
+    "gender": "",
+    "declension": {},
+    "conjugation": {},
+    "etymology": [
+      { "part": "am-", "meaning": "情感、喜爱" },
+      { "part": "-are", "meaning": "第一变位动词后缀" }
+    ],
+    "examples": [
+      {
+        "Modern Inattian": "Amo amaram.",
+        "zh": "我爱大海。",
+        "en": "I love the sea.",
+        "es": "Amo el mar."
+      }
+    ],
+    "synonyms": ["diligere"],
+    "antonyms": ["odire"],
+    "tags": ["情感", "常用动词"]
+  },
+  {
+    "id": "v-audire",
+    "word": "audire",
+    "pos": "v",
+    "translations": {
+      "zh": "听，听见",
+      "en": "to hear",
+      "es": "oír"
+    },
+    "root": "aud",
+    "conj_pattern": "III",
+    "gender": "",
+    "declension": {},
+    "conjugation": {},
+    "etymology": [
+      { "part": "aud-", "meaning": "听觉" }
+    ],
+    "examples": [],
+    "synonyms": [],
+    "antonyms": [],
+    "tags": ["感官", "常用动词"]
+  },
+  {
+    "id": "v-esse",
+    "word": "esse",
+    "pos": "v",
+    "translations": {
+      "zh": "是（系动词）",
+      "en": "to be",
+      "es": "ser"
+    },
+    "root": "es",
+    "conj_pattern": "irregular",
+    "gender": "",
+    "declension": {},
+    "conjugation": {},
+    "etymology": [
+      { "part": "es-", "meaning": "存在（不规则词根）" }
+    ],
+    "examples": [
+      {
+        "Modern Inattian": "Ego sum.",
+        "zh": "我存在。",
+        "en": "I am.",
+        "es": "Yo soy."
+      }
+    ],
+    "synonyms": [],
+    "antonyms": [],
+    "tags": ["系动词", "不规则", "高频"]
+  }
+]
