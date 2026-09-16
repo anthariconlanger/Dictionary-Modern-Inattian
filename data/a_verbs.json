@@ -30,26 +30,26 @@
     "tags": ["情感", "常用动词"]
   },
   {
-    "id": "v-audire",
-    "word": "audire",
+    "id": "v-ayudo",
+    "word": "ayudo",
     "pos": "v",
     "translations": {
-      "zh": "听，听见",
-      "en": "to hear",
-      "es": "oír"
+      "zh": "救",
+      "en": "to help",
+      "es": "ayudar"
     },
-    "root": "aud",
-    "conj_pattern": "III",
+    "root": "ayud",
+    "conj_pattern": "I",
     "gender": "",
     "declension": {},
     "conjugation": {},
     "etymology": [
-      { "part": "aud-", "meaning": "听觉" }
+      { "part": "ayud-", "meaning": "帮" }
     ],
     "examples": [],
     "synonyms": [],
     "antonyms": [],
-    "tags": ["感官", "常用动词"]
+    "tags": ["帮忙", "常用动词"]
   },
   {
     "id": "v-esse",
