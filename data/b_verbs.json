@@ -1,0 +1,76 @@
+[
+  {
+    "id": "v-bofizo",
+    "word": "bofizo",
+    "pos": "v",
+    "translations": {
+      "zh": "鸟啼叫；喔喔叫",
+      "en": "to chirp, to crow",
+      "es": "ulular"
+    },
+    "root": "bofiz",
+    "conj_pattern": "I",
+    "gender": "",
+    "declension": {},
+    "conjugation": {},
+    "etymology": [
+      { "part": "bofiz-", "meaning": "鸟啼叫；喔喔叫" },
+      { "part": "-ax", "meaning": "第一变位动词后缀" }
+    ],
+    "examples": [],
+    "synonyms": [],
+    "antonyms": [],
+    "tags": ["动物", "常用动词"]
+  },
+  {
+    "id": "v-",
+    "word": "audire",
+    "pos": "v",
+    "translations": {
+      "zh": "听，听见",
+      "en": "to hear",
+      "es": "oír"
+    },
+    "root": "aud",
+    "conj_pattern": "III",
+    "gender": "",
+    "declension": {},
+    "conjugation": {},
+    "etymology": [
+      { "part": "aud-", "meaning": "听觉" }
+    ],
+    "examples": [],
+    "synonyms": [],
+    "antonyms": [],
+    "tags": ["感官", "常用动词"]
+  },
+  {
+    "id": "v-esse",
+    "word": "esse",
+    "pos": "v",
+    "translations": {
+      "zh": "是（系动词）",
+      "en": "to be",
+      "es": "ser"
+    },
+    "root": "es",
+    "conj_pattern": "irregular",
+    "gender": "",
+    "declension": {},
+    "conjugation": {},
+    "etymology": [
+      { "part": "es-", "meaning": "存在（不规则词根）" }
+    ],
+    "examples": [
+      {
+        "Modern Inattian": "Ego sum.",
+        "zh": "我存在。",
+        "en": "I am.",
+        "es": "Yo soy."
+      }
+    ],
+    "synonyms": [],
+    "antonyms": [],
+    "tags": ["系动词", "不规则", "高频"]
+  }
+]
