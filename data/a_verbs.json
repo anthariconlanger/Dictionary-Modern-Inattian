@@ -52,32 +52,25 @@
     "tags": ["帮忙", "常用动词"]
   },
   {
-    "id": "v-esse",
-    "word": "esse",
+    "id": "v-adaiso",
+    "word": "adaiso",
     "pos": "v",
     "translations": {
-      "zh": "是（系动词）",
-      "en": "to be",
-      "es": "ser"
+      "zh": "得到；获得",
+      "en": "to get、to obtain、to acquire",
+      "es": "tomar、agarrar、obtener"
     },
-    "root": "es",
-    "conj_pattern": "irregular",
+    "root": "adais",
+    "conj_pattern": "regular",
     "gender": "",
     "declension": {},
     "conjugation": {},
     "etymology": [
-      { "part": "es-", "meaning": "存在（不规则词根）" }
+      { "part": "adais-", "meaning": "获得" }
     ],
-    "examples": [
-      {
-        "Modern Inattian": "Ego sum.",
-        "zh": "我存在。",
-        "en": "I am.",
-        "es": "Yo soy."
-      }
-    ],
+    "examples": [],
     "synonyms": [],
     "antonyms": [],
-    "tags": ["系动词", "不规则", "高频"]
+    "tags": ["动词", 不规则", "高频"]
   }
 ]
