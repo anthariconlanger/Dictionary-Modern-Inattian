@@ -189,31 +189,31 @@ PERSONS = ["1sg", "2sg", "3sg", "1pl", "2pl", "3pl"]
 REGULAR_PATTERNS: Dict[str, Dict[str, Dict[str, str]]] = {
     "I": {  # 第一变位式，例如以 -a 结尾的词根
         "直陈式现在时": {
-            "1sg": "a", "2sg": "as", "3sg": "at",
-            "1pl": "amus", "2pl": "atis", "3pl": "ant",
+            "1sg": "o", "2sg": "as", "3sg": "a",
+            "1pl": "ame", "2pl": "axe", "3pl": "a",
         },
         "直陈式过去时": {
-            "1sg": "aba", "2sg": "abas", "3sg": "abat",
-            "1pl": "abamus", "2pl": "abatis", "3pl": "aband",
+            "1sg": "é", "2sg": "ar", "3sg": " ",
+            "1pl": "am", "2pl": "er", "3pl": " ",
         },
         "直陈式将来时": {
             "1sg": "abo", "2sg": "abis", "3sg": "abit",
             "1pl": "abimus", "2pl": "abitis", "3pl": "abunt",
         },
         "虚拟式": {
-            "1sg": "em", "2sg": "es", "3sg": "et",
-            "1pl": "emus", "2pl": "etis", "3pl": "ent",
+            "1sg": "ŭ", "2sg": "e", "3sg": "e",
+            "1pl": "em", "2pl": "ex", "3pl": "e",
         },
-        "命令式": {"2sg": "a", "2pl": "ate"},
+        "命令式": {"2sg": "a", "2pl": "axi"},
         "非限定式": {"不定式": "are", "动名词": "ando", "过去分词": "atum"},
     },
     "II": {  # 第二变位式，例如以 -e 结尾的词根
         "直陈式现在时": {
-            "1sg": "eo", "2sg": "es", "3sg": "et",
-            "1pl": "emus", "2pl": "etis", "3pl": "ent",
+            "1sg": "o", "2sg": "es", "3sg": "e",
+            "1pl": "ŭme", "2pl": "exe", "3pl": "e",
         },
         "直陈式过去时": {
-            "1sg": "eba", "2sg": "ebas", "3sg": "ebat",
+            "1sg": "é", "2sg": "ebas", "3sg": "ebat",
             "1pl": "ebamus", "2pl": "ebatis", "3pl": "ebant",
         },
         "直陈式将来时": {
