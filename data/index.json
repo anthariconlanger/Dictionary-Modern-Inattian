@@ -1,57 +1,107 @@
 {
-  "generated_at": "2026-09-16T15:20:16+00:00",
-  "count": 5,
+  "generated_at": "2026-09-17T00:00:48+00:00",
+  "count": 10,
   "entries": [
     {
-      "id": "n-amara",
-      "word": "amara",
+      "id": "v-adaiso",
+      "word": "adaiso",
+      "pos": "v",
+      "translations": {
+        "zh": "得到；获得",
+        "en": "to get、to obtain、to acquire",
+        "es": "tomar、agarrar、obtener"
+      },
+      "root": "adais",
+      "conj_pattern": "II",
+      "gender": "",
+      "declension": {},
+      "conjugation": {
+        "直陈式现在时": {
+          "1sg": "adaiso",
+          "2sg": "adaises",
+          "3sg": "adaise",
+          "1pl": "adaisŭme",
+          "2pl": "adaisexe",
+          "3pl": "adaise"
+        },
+        "直陈式过去时": {
+          "1sg": "adaisé",
+          "2sg": "adaisebas",
+          "3sg": "adaisebat",
+          "1pl": "adaisebamus",
+          "2pl": "adaisebatis",
+          "3pl": "adaisebant"
+        },
+        "直陈式将来时": {
+          "1sg": "adaisebo",
+          "2sg": "adaisebis",
+          "3sg": "adaisebit",
+          "1pl": "adaisebimus",
+          "2pl": "adaisebitis",
+          "3pl": "adaisebunt"
+        },
+        "虚拟式": {
+          "1sg": "adaiseam",
+          "2sg": "adaiseas",
+          "3sg": "adaiseat",
+          "1pl": "adaiseamus",
+          "2pl": "adaiseatis",
+          "3pl": "adaiseant"
+        },
+        "命令式": {
+          "2sg": "adaise",
+          "2pl": "adaisete"
+        },
+        "非限定式": {
+          "不定式": "adaisere",
+          "动名词": "adaisendo",
+          "过去分词": "adaisitum"
+        }
+      },
+      "etymology": [
+        {
+          "part": "adais-",
+          "meaning": "获得"
+        }
+      ],
+      "examples": [],
+      "synonyms": [],
+      "antonyms": [],
+      "tags": [
+        "动词",
+        "不规则",
+        "高频"
+      ]
+    },
+    {
+      "id": "n-aleska",
+      "word": "aleska",
       "pos": "n",
       "translations": {
-        "zh": "海",
-        "en": "sea",
-        "es": "mar"
+        "zh": "医生",
+        "en": "doctor",
+        "es": "doctor"
       },
       "gender": "common",
       "declension": {
         "单数": {
-          "主格": "amara",
-          "属格": "amarai",
-          "宾格": "amaram"
+          "主格": "aleska",
+          "属格": "alesker",
+          "宾格": "aleska"
         },
         "复数": {
-          "主格": "amarai",
-          "属格": "amaraum",
-          "宾格": "amaras"
+          "主格": "aleske",
+          "属格": "alesku",
+          "宾格": "aleskas"
         }
       },
       "conjugation": {},
-      "etymology": [
-        {
-          "part": "am-",
-          "meaning": "水、湿润"
-        },
-        {
-          "part": "-ara",
-          "meaning": "广阔之物（名词后缀）"
-        }
-      ],
-      "examples": [
-        {
-          "Modern Inattian": "Amara nigra est.",
-          "zh": "大海是深色的。",
-          "en": "The sea is dark.",
-          "es": "El mar es oscuro."
-        }
-      ],
-      "synonyms": [
-        "pelagos"
-      ],
-      "antonyms": [
-        "terra"
-      ],
+      "etymology": [],
+      "examples": [],
+      "synonyms": [],
+      "antonyms": [],
       "tags": [
-        "自然",
-        "地理"
+        "救治"
       ]
     },
     {
@@ -69,20 +119,20 @@
       "declension": {},
       "conjugation": {
         "直陈式现在时": {
-          "1sg": "ama",
+          "1sg": "amo",
           "2sg": "amas",
-          "3sg": "amat",
-          "1pl": "amamus",
-          "2pl": "amatis",
-          "3pl": "amant"
+          "3sg": "ama",
+          "1pl": "amame",
+          "2pl": "amaxe",
+          "3pl": "ama"
         },
         "直陈式过去时": {
-          "1sg": "amaba",
-          "2sg": "amabas",
-          "3sg": "amabat",
-          "1pl": "amabamus",
-          "2pl": "amabatis",
-          "3pl": "amaband"
+          "1sg": "amé",
+          "2sg": "amar",
+          "3sg": "am ",
+          "1pl": "amam",
+          "2pl": "amer",
+          "3pl": "am "
         },
         "直陈式将来时": {
           "1sg": "amabo",
@@ -93,16 +143,16 @@
           "3pl": "amabunt"
         },
         "虚拟式": {
-          "1sg": "amem",
-          "2sg": "ames",
-          "3sg": "amet",
-          "1pl": "amemus",
-          "2pl": "ametis",
-          "3pl": "ament"
+          "1sg": "amŭ",
+          "2sg": "ame",
+          "3sg": "ame",
+          "1pl": "amem",
+          "2pl": "amex",
+          "3pl": "ame"
         },
         "命令式": {
           "2sg": "ama",
-          "2pl": "amate"
+          "2pl": "amaxi"
         },
         "非限定式": {
           "不定式": "amare",
@@ -140,7 +190,59 @@
       ]
     },
     {
-      "id": "v-audire",
+      "id": "n-apatiga",
+      "word": "apatiga",
+      "pos": "n",
+      "translations": {
+        "zh": "爱",
+        "en": "love",
+        "es": "amor"
+      },
+      "gender": "common",
+      "declension": {
+        "单数": {
+          "主格": "apatiga",
+          "属格": "apatiger",
+          "宾格": "apatiga"
+        },
+        "复数": {
+          "主格": "apatige",
+          "属格": "apatigu",
+          "宾格": "apatigas"
+        }
+      },
+      "conjugation": {},
+      "etymology": [
+        {
+          "part": "apa-",
+          "meaning": "向、往"
+        },
+        {
+          "part": "-tig-",
+          "meaning": "遮住、保护（动词后缀）"
+        },
+        {
+          "part": "-a",
+          "meaning": "名词后缀"
+        }
+      ],
+      "examples": [
+        {
+          "Modern Inattian": "ă apatiga je ber.",
+          "zh": "爱是很好的。",
+          "en": "The love is good.",
+          "es": "El amor es bueno."
+        }
+      ],
+      "synonyms": [],
+      "antonyms": [],
+      "tags": [
+        "人性",
+        "情感"
+      ]
+    },
+    {
+      "id": "v-",
       "word": "audire",
       "pos": "v",
       "translations": {
@@ -206,6 +308,213 @@
       "antonyms": [],
       "tags": [
         "感官",
+        "常用动词"
+      ]
+    },
+    {
+      "id": "v-ayudo",
+      "word": "ayudo",
+      "pos": "v",
+      "translations": {
+        "zh": "救",
+        "en": "to help",
+        "es": "ayudar"
+      },
+      "root": "ayud",
+      "conj_pattern": "I",
+      "gender": "",
+      "declension": {},
+      "conjugation": {
+        "直陈式现在时": {
+          "1sg": "ayudo",
+          "2sg": "ayudas",
+          "3sg": "ayuda",
+          "1pl": "ayudame",
+          "2pl": "ayudaxe",
+          "3pl": "ayuda"
+        },
+        "直陈式过去时": {
+          "1sg": "ayudé",
+          "2sg": "ayudar",
+          "3sg": "ayud ",
+          "1pl": "ayudam",
+          "2pl": "ayuder",
+          "3pl": "ayud "
+        },
+        "直陈式将来时": {
+          "1sg": "ayudabo",
+          "2sg": "ayudabis",
+          "3sg": "ayudabit",
+          "1pl": "ayudabimus",
+          "2pl": "ayudabitis",
+          "3pl": "ayudabunt"
+        },
+        "虚拟式": {
+          "1sg": "ayudŭ",
+          "2sg": "ayude",
+          "3sg": "ayude",
+          "1pl": "ayudem",
+          "2pl": "ayudex",
+          "3pl": "ayude"
+        },
+        "命令式": {
+          "2sg": "ayuda",
+          "2pl": "ayudaxi"
+        },
+        "非限定式": {
+          "不定式": "ayudare",
+          "动名词": "ayudando",
+          "过去分词": "ayudatum"
+        }
+      },
+      "etymology": [
+        {
+          "part": "ayud-",
+          "meaning": "帮"
+        }
+      ],
+      "examples": [],
+      "synonyms": [],
+      "antonyms": [],
+      "tags": [
+        "帮忙",
+        "常用动词"
+      ]
+    },
+    {
+      "id": "n-baba",
+      "word": "baba",
+      "pos": "n",
+      "translations": {
+        "zh": "奶奶、阿嬷",
+        "en": "grandma",
+        "es": "abuela, nona"
+      },
+      "gender": "common",
+      "declension": {
+        "单数": {
+          "主格": "baba",
+          "属格": "babu",
+          "宾格": "baba"
+        },
+        "复数": {
+          "主格": "babe",
+          "属格": "babu",
+          "宾格": "babas"
+        }
+      },
+      "conjugation": {},
+      "etymology": [],
+      "examples": [],
+      "synonyms": [],
+      "antonyms": [],
+      "tags": [
+        "家庭",
+        "亲属关系"
+      ]
+    },
+    {
+      "id": "n-bisbaxil",
+      "word": "bisbaxil",
+      "pos": "n",
+      "translations": {
+        "zh": "蝙蝠",
+        "en": "bat (animal)",
+        "es": "murciélago (animal)"
+      },
+      "gender": "neutral",
+      "declension": {
+        "单数": {
+          "主格": "bisbaxil",
+          "属格": "bisbaxilŭs",
+          "宾格": "aleska"
+        },
+        "复数": {
+          "主格": "bisbaxila",
+          "属格": "bisbaxilŭ",
+          "宾格": "bisbaxila"
+        }
+      },
+      "conjugation": {},
+      "etymology": [],
+      "examples": [],
+      "synonyms": [],
+      "antonyms": [],
+      "tags": [
+        "动物"
+      ]
+    },
+    {
+      "id": "v-bofizo",
+      "word": "bofizo",
+      "pos": "v",
+      "translations": {
+        "zh": "鸟啼叫；喔喔叫",
+        "en": "to chirp, to crow",
+        "es": "ulular"
+      },
+      "root": "bofiz",
+      "conj_pattern": "I",
+      "gender": "",
+      "declension": {},
+      "conjugation": {
+        "直陈式现在时": {
+          "1sg": "bofizo",
+          "2sg": "bofizas",
+          "3sg": "bofiza",
+          "1pl": "bofizame",
+          "2pl": "bofizaxe",
+          "3pl": "bofiza"
+        },
+        "直陈式过去时": {
+          "1sg": "bofizé",
+          "2sg": "bofizar",
+          "3sg": "bofiz ",
+          "1pl": "bofizam",
+          "2pl": "bofizer",
+          "3pl": "bofiz "
+        },
+        "直陈式将来时": {
+          "1sg": "bofizabo",
+          "2sg": "bofizabis",
+          "3sg": "bofizabit",
+          "1pl": "bofizabimus",
+          "2pl": "bofizabitis",
+          "3pl": "bofizabunt"
+        },
+        "虚拟式": {
+          "1sg": "bofizŭ",
+          "2sg": "bofize",
+          "3sg": "bofize",
+          "1pl": "bofizem",
+          "2pl": "bofizex",
+          "3pl": "bofize"
+        },
+        "命令式": {
+          "2sg": "bofiza",
+          "2pl": "bofizaxi"
+        },
+        "非限定式": {
+          "不定式": "bofizare",
+          "动名词": "bofizando",
+          "过去分词": "bofizatum"
+        }
+      },
+      "etymology": [
+        {
+          "part": "bofiz-",
+          "meaning": "鸟啼叫；喔喔叫"
+        },
+        {
+          "part": "-ax",
+          "meaning": "第一变位动词后缀"
+        }
+      ],
+      "examples": [],
+      "synonyms": [],
+      "antonyms": [],
+      "tags": [
+        "动物",
         "常用动词"
       ]
     },
@@ -285,46 +594,6 @@
         "系动词",
         "不规则",
         "高频"
-      ]
-    },
-    {
-      "id": "adj-nigra",
-      "word": "nigra",
-      "pos": "adj",
-      "translations": {
-        "zh": "黑色的，深色的",
-        "en": "dark, black",
-        "es": "oscuro"
-      },
-      "gender": "neutral",
-      "declension": {
-        "单数": {
-          "主格": "nigra",
-          "属格": "nigrai",
-          "宾格": "nigram"
-        },
-        "复数": {
-          "主格": "nigrai",
-          "属格": "nigraum",
-          "宾格": "nigras"
-        }
-      },
-      "conjugation": {},
-      "etymology": [
-        {
-          "part": "nigr-",
-          "meaning": "黑、暗"
-        }
-      ],
-      "examples": [],
-      "synonyms": [
-        "obscura"
-      ],
-      "antonyms": [
-        "alba"
-      ],
-      "tags": [
-        "颜色"
       ]
     }
   ]
