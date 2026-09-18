@@ -45,7 +45,7 @@ VALID_GENDER = {"common", "neutral"}
 
 CUSTOM_ALPHABET = [
     "a", "ă", "b", "c", "ç", "d", "e", "f", "g", "h", "i", "ŭ", "j", "k", "l",
-    "m", "n", "ń", "o", "p", "ž", "r", "s", "t", "x", "u", "v", "w", "z",
+    "m", "n", "ń", "o", "p", "ž", "r", "s", "t", "x", "u", "v", "w", "z", "ź", 
 ]
 LETTER_RANK = {letter: idx for idx, letter in enumerate(CUSTOM_ALPHABET)}
 # 多字符字母（如果以后字母表里又加入类似 "th" 的复合字母）按长度从长到短
