@@ -19,6 +19,14 @@
 
   const POS_LABEL = { n: "名词", v: "动词", adj: "形容词" };
 
+  // 伊纳特语真实字母表（按你提供的顺序，不是拉丁字母顺序）。
+  // 必须跟 make_index.py 里的 CUSTOM_ALPHABET 顺序完全一一对应，
+  // 唯一区别是这里每个字母首字符大写、那边全小写。
+  const ALPHABET = [
+    "A", "Ă", "B", "C", "Ç", "D", "E", "F", "G", "H", "I", "Ŭ", "J", "K", "L",
+    "M", "N", "Ń", "O", "P", "Ž", "R", "S", "T", "X", "U", "V", "W", "Z",
+  ];
+
   /** @type {{word:string,pos:string,[k:string]:any}[]} */
   let allEntries = [];
   let loadFailed = false;
@@ -58,8 +66,12 @@
     }[ch]));
   }
 
-  function firstLetter(word) {
-    return (word || "").trim().charAt(0).toUpperCase();
+  function firstLetter(entry) {
+    // 优先用后端 make_index.py 按伊纳特语真实字母表算好的 letter 字段
+    // （能正确识别 th 这种复合字母）；如果索引还是旧格式没有这个字段，
+    // 退化成取词的第一个字符，保证页面不报错。
+    if (entry.letter) return entry.letter;
+    return (entry.word || "").trim().charAt(0).toUpperCase();
   }
 
   function scrollToTopIfLevelChanged(currentLevel) {
@@ -142,8 +154,7 @@
   // ------------------------------------------------------------------
 
   function buildAlphabetNav() {
-    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-    const available = new Set(allEntries.map((e) => firstLetter(e.word)));
+    const available = new Set(allEntries.map((e) => firstLetter(e)));
 
     el.alphabetNav.innerHTML = "";
 
@@ -158,7 +169,7 @@
     });
     el.alphabetNav.appendChild(resetBtn);
 
-    letters.forEach((letter) => {
+    ALPHABET.forEach((letter) => {
       const btn = document.createElement("button");
       btn.type = "button";
       btn.textContent = letter;
@@ -434,7 +445,7 @@
     el.entryList.hidden = false;
 
     const byLetter = state.letter
-      ? allEntries.filter((e) => firstLetter(e.word) === state.letter)
+      ? allEntries.filter((e) => firstLetter(e) === state.letter)
       : allEntries;
 
     if (state.letter && byLetter.length === 0) {

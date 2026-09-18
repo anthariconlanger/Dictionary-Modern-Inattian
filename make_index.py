@@ -36,6 +36,56 @@ INDEX_PATH = DATA_DIR / "index.json"
 VALID_POS = {"n", "v", "adj"}
 VALID_GENDER = {"common", "neutral"}
 
+# --------------------------------------------------------------------------
+# 伊纳特语字母表与排序规则（按用户提供的真实字母顺序，不是拉丁字母顺序！）
+# 如果以后字母表里出现像 "th" 这样占多个字符的复合字母，下面的分词逻辑
+# 会自动优先整体匹配，不用另外改代码——只需要把它整体作为一个字符串加进
+# CUSTOM_ALPHABET 列表即可。
+# --------------------------------------------------------------------------
+
+CUSTOM_ALPHABET = [
+    "a", "ă", "b", "c", "ç", "d", "e", "f", "g", "h", "i", "ŭ", "j", "k", "l",
+    "m", "n", "ń", "o", "p", "ž", "r", "s", "t", "x", "u", "v", "w", "z",
+]
+LETTER_RANK = {letter: idx for idx, letter in enumerate(CUSTOM_ALPHABET)}
+# 多字符字母（如果以后字母表里又加入类似 "th" 的复合字母）按长度从长到短
+# 排列，分词时优先匹配；目前这套字母表里没有复合字母，这里会是空列表。
+MULTI_CHAR_LETTERS = sorted(
+    (l for l in CUSTOM_ALPHABET if len(l) > 1), key=len, reverse=True
+)
+
+
+def tokenize_word(word: str) -> List[str]:
+    """把一个词切分成“字母单位”序列，正确识别 th 这样的复合字母。"""
+    w = word.lower()
+    tokens: List[str] = []
+    i = 0
+    n = len(w)
+    while i < n:
+        matched = None
+        for ml in MULTI_CHAR_LETTERS:
+            if w.startswith(ml, i):
+                matched = ml
+                break
+        if matched is None:
+            matched = w[i]
+        tokens.append(matched)
+        i += len(matched)
+    return tokens
+
+
+def collation_key(word: str):
+    """按伊纳特语真实字母顺序生成排序键；表外字符（如遗留占位数据里的普通
+    拉丁字母）不会报错，只是被排到已知字母表之后，按 Unicode 码位排序。"""
+    tokens = tokenize_word(word)
+    return tuple(LETTER_RANK.get(t, 10_000 + ord(t[0])) for t in tokens)
+
+
+def display_letter(word: str) -> str:
+    """词条的“首字母”显示形式，供网页字母导航分组使用，例如 th 开头显示为 Th。"""
+    tokens = tokenize_word(word)
+    return tokens[0].capitalize() if tokens else ""
+
 # 源文件里必须原样保留的“空值”字段（不可省略，见方案“字段约束规则”）
 COMMON_REQUIRED_KEYS = [
     "id", "word", "pos", "translations", "etymology",
@@ -189,31 +239,31 @@ PERSONS = ["1sg", "2sg", "3sg", "1pl", "2pl", "3pl"]
 REGULAR_PATTERNS: Dict[str, Dict[str, Dict[str, str]]] = {
     "I": {  # 第一变位式，例如以 -a 结尾的词根
         "直陈式现在时": {
-            "1sg": "o", "2sg": "as", "3sg": "a",
-            "1pl": "ame", "2pl": "axe", "3pl": "a",
+            "1sg": "a", "2sg": "as", "3sg": "at",
+            "1pl": "amus", "2pl": "atis", "3pl": "ant",
         },
         "直陈式过去时": {
-            "1sg": "é", "2sg": "ar", "3sg": " ",
-            "1pl": "am", "2pl": "er", "3pl": " ",
+            "1sg": "aba", "2sg": "abas", "3sg": "abat",
+            "1pl": "abamus", "2pl": "abatis", "3pl": "aband",
         },
         "直陈式将来时": {
             "1sg": "abo", "2sg": "abis", "3sg": "abit",
             "1pl": "abimus", "2pl": "abitis", "3pl": "abunt",
         },
         "虚拟式": {
-            "1sg": "ŭ", "2sg": "e", "3sg": "e",
-            "1pl": "em", "2pl": "ex", "3pl": "e",
+            "1sg": "em", "2sg": "es", "3sg": "et",
+            "1pl": "emus", "2pl": "etis", "3pl": "ent",
         },
-        "命令式": {"2sg": "a", "2pl": "axi"},
+        "命令式": {"2sg": "a", "2pl": "ate"},
         "非限定式": {"不定式": "are", "动名词": "ando", "过去分词": "atum"},
     },
     "II": {  # 第二变位式，例如以 -e 结尾的词根
         "直陈式现在时": {
-            "1sg": "o", "2sg": "es", "3sg": "e",
-            "1pl": "ŭme", "2pl": "exe", "3pl": "e",
+            "1sg": "eo", "2sg": "es", "3sg": "et",
+            "1pl": "emus", "2pl": "etis", "3pl": "ent",
         },
         "直陈式过去时": {
-            "1sg": "é", "2sg": "ebas", "3sg": "ebat",
+            "1sg": "eba", "2sg": "ebas", "3sg": "ebat",
             "1pl": "ebamus", "2pl": "ebatis", "3pl": "ebant",
         },
         "直陈式将来时": {
@@ -321,9 +371,12 @@ def build_index(entries: List[Dict[str, Any]]) -> Dict[str, Any]:
         out.pop("_source_file", None)
         if out["pos"] == "v":
             out["conjugation"] = conjugate_verb(out)
+        # “letter” 是给网页字母导航用的派生字段，按伊纳特语真实字母表计算，
+        # 源 JSON 文件里不需要、也不应该手动填写这个字段。
+        out["letter"] = display_letter(out["word"])
         merged.append(out)
 
-    merged.sort(key=lambda e: e["word"].lower())
+    merged.sort(key=lambda e: collation_key(e["word"]))
 
     return {
         "generated_at": datetime.datetime.now(datetime.timezone.utc)
