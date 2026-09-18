@@ -39,8 +39,11 @@
   const el = {
     alphabetNav: document.getElementById("alphabet-nav"),
     searchInput: document.getElementById("search-input"),
+    searchClear: document.getElementById("search-clear"),
     breadcrumb: document.getElementById("breadcrumb"),
+    loadingIndicator: document.getElementById("loading-indicator"),
     statusBanner: document.getElementById("status-banner"),
+    listMeta: document.getElementById("list-meta"),
     entryList: document.getElementById("entry-list"),
     entryDetail: document.getElementById("entry-detail"),
   };
@@ -82,6 +85,27 @@
     return haystacks.some((h) => h && String(h).toLowerCase().includes(q));
   }
 
+  /** 转义字符串中会破坏正则的特殊字符 */
+  function escapeRegExp(str) {
+    return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  }
+
+  /**
+   * 对原始文本做 HTML 转义的同时，把第一处匹配 query 的子串包进 <mark> 高亮。
+   * 找不到匹配、或 query 为空时，等价于普通的 escapeHtml。
+   */
+  function highlightHtml(rawText, query) {
+    const text = String(rawText ?? "");
+    if (!query) return escapeHtml(text);
+    const re = new RegExp(escapeRegExp(query), "i");
+    const match = re.exec(text);
+    if (!match) return escapeHtml(text);
+    const before = text.slice(0, match.index);
+    const hit = text.slice(match.index, match.index + match[0].length);
+    const after = text.slice(match.index + match[0].length);
+    return `${escapeHtml(before)}<mark>${escapeHtml(hit)}</mark>${escapeHtml(after)}`;
+  }
+
   // ------------------------------------------------------------------
   // 数据加载（容错：超时 / 网络失败都不能让页面卡死或崩溃）
   // ------------------------------------------------------------------
@@ -108,6 +132,7 @@
       console.error("词典索引加载失败：", err);
     }
 
+    el.loadingIndicator.hidden = true;
     buildAlphabetNav();
     render();
   }
@@ -164,8 +189,23 @@
 
   el.searchInput.addEventListener("input", (e) => {
     state.query = e.target.value.trim();
+    el.searchClear.hidden = state.query === "";
     // 清空搜索框时，query 变为空字符串，视图自动回退到当前字母分组 / 首页——
     // 这是天然发生的，因为搜索只是在当前上下文之上叠加的过滤条件。
+    render();
+  });
+
+  // 处理浏览器自动填充/前进后退导致输入框已有内容的情况
+  if (el.searchInput.value.trim()) {
+    state.query = el.searchInput.value.trim();
+    el.searchClear.hidden = false;
+  }
+
+  el.searchClear.addEventListener("click", () => {
+    el.searchInput.value = "";
+    state.query = "";
+    el.searchClear.hidden = true;
+    el.searchInput.focus();
     render();
   });
 
@@ -233,7 +273,7 @@
           <span>${title}</span>
           <span class="panel__arrow">${isOpen ? "▼" : "▶"}</span>
         </button>
-        <div class="panel__body" id="${panelId}">${body}</div>
+        <div class="panel__body" id="${panelId}"><div class="panel__body-inner">${body}</div></div>
       </div>`;
   }
 
@@ -241,7 +281,7 @@
   // 渲染：词条卡片（完整信息 + 折叠面板）
   // ------------------------------------------------------------------
 
-  function renderEntryCard(entry, { clickableHeader }) {
+  function renderEntryCard(entry, { clickableHeader, prevEntry, nextEntry }) {
     const etymologyHtml = (entry.etymology || []).length
       ? `<ul class="etymology-list">${entry.etymology.map((e) => `
           <li><strong>${escapeHtml(e.part)}</strong> — ${escapeHtml(e.meaning)}</li>
@@ -273,6 +313,18 @@
       ? `<button type="button" class="detail-card__word as-link" data-open-detail="${escapeHtml(entry.id)}" style="background:none;border:none;cursor:pointer;padding:0;">${escapeHtml(entry.word)}</button>`
       : `<h2 class="detail-card__word">${escapeHtml(entry.word)}</h2>`;
 
+    const navHtml = clickableHeader ? "" : `
+      <nav class="detail-nav" aria-label="上一词条 / 下一词条">
+        <button type="button" ${prevEntry ? `data-open-detail="${escapeHtml(prevEntry.id)}"` : "disabled"}>
+          <span class="detail-nav__label">‹ 上一词条</span>
+          <span class="detail-nav__word">${prevEntry ? escapeHtml(prevEntry.word) : "—"}</span>
+        </button>
+        <button type="button" ${nextEntry ? `data-open-detail="${escapeHtml(nextEntry.id)}"` : "disabled"}>
+          <span class="detail-nav__label">下一词条 ›</span>
+          <span class="detail-nav__word">${nextEntry ? escapeHtml(nextEntry.word) : "—"}</span>
+        </button>
+      </nav>`;
+
     return `
       <article class="detail-card" data-entry-card="${escapeHtml(entry.id)}">
         <div class="detail-card__head">
@@ -301,17 +353,18 @@
         ${tagsHtml ? `<div class="detail-section">${tagsHtml}</div>` : ""}
 
         ${renderGrammarPanel(entry)}
+        ${navHtml}
       </article>`;
   }
 
-  function renderEntryListRow(entry) {
+  function renderEntryListRow(entry, query) {
     const gloss = [entry.translations?.zh, entry.translations?.en, entry.translations?.es]
       .filter(Boolean).join(" / ");
     return `
       <button type="button" class="entry-row" data-open-detail="${escapeHtml(entry.id)}">
-        <span class="entry-row__word">${escapeHtml(entry.word)}</span>
+        <span class="entry-row__word">${highlightHtml(entry.word, query)}</span>
         <span class="entry-row__pos">${POS_LABEL[entry.pos] || entry.pos}</span>
-        <span class="entry-row__gloss">${escapeHtml(gloss)}</span>
+        <span class="entry-row__gloss">${highlightHtml(gloss, query)}</span>
       </button>`;
   }
 
@@ -347,6 +400,7 @@
       el.statusBanner.hidden = false;
       el.statusBanner.textContent =
         "词典数据加载失败（网络超时或连接中断）。请检查网络连接后刷新页面重试，页面其他部分仍可正常浏览。";
+      el.listMeta.hidden = true;
       el.entryList.hidden = false;
       el.entryList.innerHTML = "";
       el.entryDetail.hidden = true;
@@ -357,13 +411,19 @@
 
     // --- 详情页 ---
     if (state.detailId) {
-      const entry = allEntries.find((e) => e.id === state.detailId);
+      const idx = allEntries.findIndex((e) => e.id === state.detailId);
+      const entry = idx === -1 ? null : allEntries[idx];
+      el.listMeta.hidden = true;
       el.entryList.hidden = true;
       el.entryDetail.hidden = false;
       if (!entry) {
         el.entryDetail.innerHTML = `<p class="status-banner">未找到该词条，可能已被移除。</p>`;
       } else {
-        el.entryDetail.innerHTML = renderEntryCard(entry, { clickableHeader: false });
+        const prevEntry = idx > 0 ? allEntries[idx - 1] : null;
+        const nextEntry = idx < allEntries.length - 1 ? allEntries[idx + 1] : null;
+        el.entryDetail.innerHTML = renderEntryCard(entry, {
+          clickableHeader: false, prevEntry, nextEntry,
+        });
       }
       scrollToTopIfLevelChanged("detail");
       return;
@@ -378,6 +438,7 @@
       : allEntries;
 
     if (state.letter && byLetter.length === 0) {
+      el.listMeta.hidden = true;
       el.entryList.innerHTML = `<p class="status-banner is-empty">字母 “${escapeHtml(state.letter)}” 暂无词条。</p>`;
       scrollToTopIfLevelChanged(`letter:${state.letter}`);
       return;
@@ -390,16 +451,23 @@
       : `letter:${state.letter || "all"}`;
 
     if (visible.length === 0) {
+      el.listMeta.hidden = true;
       el.entryList.innerHTML = `<p class="status-banner is-empty">没有找到匹配 “${escapeHtml(state.query)}” 的词条。</p>`;
       scrollToTopIfLevelChanged(currentLevel);
       return;
     }
 
-    const heading = state.query
-      ? `<p class="status-banner">搜索结果 · 共 ${visible.length} 条${state.letter ? `（字母 ${escapeHtml(state.letter)} 内）` : ""}</p>`
-      : "";
+    // 统一的计数提示行：区分“搜索结果”与普通浏览
+    el.listMeta.hidden = false;
+    if (state.query) {
+      el.listMeta.textContent = `搜索结果 · 共 ${visible.length} 条${state.letter ? `（字母 ${state.letter} 内）` : ""}`;
+    } else if (state.letter) {
+      el.listMeta.textContent = `字母 ${state.letter} · 共 ${visible.length} 条`;
+    } else {
+      el.listMeta.textContent = `全部词条 · 共 ${visible.length} 条`;
+    }
 
-    el.entryList.innerHTML = heading + visible.map(renderEntryListRow).join("");
+    el.entryList.innerHTML = visible.map((e) => renderEntryListRow(e, state.query)).join("");
 
     // 只在真正切换“层级”时才滚动到顶部，避免搜索打字时跳动
     scrollToTopIfLevelChanged(state.detailId ? "detail" : (state.letter || "home"));

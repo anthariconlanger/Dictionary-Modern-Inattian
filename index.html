@@ -21,6 +21,7 @@
       placeholder="搜索词条 · Modern Inattian / 中文 / English / Español"
       autocomplete="off"
     >
+    <button type="button" id="search-clear" class="search-clear" aria-label="清空搜索" hidden>×</button>
   </div>
 </header>
 
@@ -28,7 +29,12 @@
 
 <main id="app-main">
   <div id="breadcrumb" class="breadcrumb" hidden></div>
+  <div id="loading-indicator" class="loading-indicator">
+    <span class="loading-indicator__spinner" aria-hidden="true"></span>
+    正在加载词典…
+  </div>
   <div id="status-banner" class="status-banner" hidden></div>
+  <p id="list-meta" class="list-meta" hidden></p>
   <div id="entry-list" class="entry-list"></div>
   <div id="entry-detail" class="entry-detail" hidden></div>
 </main>
