@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-17T00:00:48+00:00",
-  "count": 10,
+  "generated_at": "2026-09-19T22:01:36+00:00",
+  "count": 12,
   "entries": [
     {
       "id": "v-adaiso",
@@ -17,15 +17,15 @@
       "declension": {},
       "conjugation": {
         "直陈式现在时": {
-          "1sg": "adaiso",
+          "1sg": "adaiseo",
           "2sg": "adaises",
-          "3sg": "adaise",
-          "1pl": "adaisŭme",
-          "2pl": "adaisexe",
-          "3pl": "adaise"
+          "3sg": "adaiset",
+          "1pl": "adaisemus",
+          "2pl": "adaisetis",
+          "3pl": "adaisent"
         },
         "直陈式过去时": {
-          "1sg": "adaisé",
+          "1sg": "adaiseba",
           "2sg": "adaisebas",
           "3sg": "adaisebat",
           "1pl": "adaisebamus",
@@ -71,7 +71,8 @@
         "动词",
         "不规则",
         "高频"
-      ]
+      ],
+      "letter": "A"
     },
     {
       "id": "n-aleska",
@@ -102,7 +103,8 @@
       "antonyms": [],
       "tags": [
         "救治"
-      ]
+      ],
+      "letter": "A"
     },
     {
       "id": "v-amare",
@@ -119,20 +121,20 @@
       "declension": {},
       "conjugation": {
         "直陈式现在时": {
-          "1sg": "amo",
+          "1sg": "ama",
           "2sg": "amas",
-          "3sg": "ama",
-          "1pl": "amame",
-          "2pl": "amaxe",
-          "3pl": "ama"
+          "3sg": "amat",
+          "1pl": "amamus",
+          "2pl": "amatis",
+          "3pl": "amant"
         },
         "直陈式过去时": {
-          "1sg": "amé",
-          "2sg": "amar",
-          "3sg": "am ",
-          "1pl": "amam",
-          "2pl": "amer",
-          "3pl": "am "
+          "1sg": "amaba",
+          "2sg": "amabas",
+          "3sg": "amabat",
+          "1pl": "amabamus",
+          "2pl": "amabatis",
+          "3pl": "amaband"
         },
         "直陈式将来时": {
           "1sg": "amabo",
@@ -143,16 +145,16 @@
           "3pl": "amabunt"
         },
         "虚拟式": {
-          "1sg": "amŭ",
-          "2sg": "ame",
-          "3sg": "ame",
-          "1pl": "amem",
-          "2pl": "amex",
-          "3pl": "ame"
+          "1sg": "amem",
+          "2sg": "ames",
+          "3sg": "amet",
+          "1pl": "amemus",
+          "2pl": "ametis",
+          "3pl": "ament"
         },
         "命令式": {
           "2sg": "ama",
-          "2pl": "amaxi"
+          "2pl": "amate"
         },
         "非限定式": {
           "不定式": "amare",
@@ -187,7 +189,8 @@
       "tags": [
         "情感",
         "常用动词"
-      ]
+      ],
+      "letter": "A"
     },
     {
       "id": "n-apatiga",
@@ -219,7 +222,7 @@
         },
         {
           "part": "-tig-",
-          "meaning": "遮住、保护（动词后缀）"
+          "meaning": "遮住、保护"
         },
         {
           "part": "-a",
@@ -239,7 +242,9 @@
       "tags": [
         "人性",
         "情感"
-      ]
+      ],
+      "image": "data/images/love.jpg.JPG",
+      "letter": "A"
     },
     {
       "id": "v-",
@@ -309,7 +314,8 @@
       "tags": [
         "感官",
         "常用动词"
-      ]
+      ],
+      "letter": "A"
     },
     {
       "id": "v-ayudo",
@@ -326,20 +332,20 @@
       "declension": {},
       "conjugation": {
         "直陈式现在时": {
-          "1sg": "ayudo",
+          "1sg": "ayuda",
           "2sg": "ayudas",
-          "3sg": "ayuda",
-          "1pl": "ayudame",
-          "2pl": "ayudaxe",
-          "3pl": "ayuda"
+          "3sg": "ayudat",
+          "1pl": "ayudamus",
+          "2pl": "ayudatis",
+          "3pl": "ayudant"
         },
         "直陈式过去时": {
-          "1sg": "ayudé",
-          "2sg": "ayudar",
-          "3sg": "ayud ",
-          "1pl": "ayudam",
-          "2pl": "ayuder",
-          "3pl": "ayud "
+          "1sg": "ayudaba",
+          "2sg": "ayudabas",
+          "3sg": "ayudabat",
+          "1pl": "ayudabamus",
+          "2pl": "ayudabatis",
+          "3pl": "ayudaband"
         },
         "直陈式将来时": {
           "1sg": "ayudabo",
@@ -350,16 +356,16 @@
           "3pl": "ayudabunt"
         },
         "虚拟式": {
-          "1sg": "ayudŭ",
-          "2sg": "ayude",
-          "3sg": "ayude",
-          "1pl": "ayudem",
-          "2pl": "ayudex",
-          "3pl": "ayude"
+          "1sg": "ayudem",
+          "2sg": "ayudes",
+          "3sg": "ayudet",
+          "1pl": "ayudemus",
+          "2pl": "ayudetis",
+          "3pl": "ayudent"
         },
         "命令式": {
           "2sg": "ayuda",
-          "2pl": "ayudaxi"
+          "2pl": "ayudate"
         },
         "非限定式": {
           "不定式": "ayudare",
@@ -379,7 +385,8 @@
       "tags": [
         "帮忙",
         "常用动词"
-      ]
+      ],
+      "letter": "A"
     },
     {
       "id": "n-baba",
@@ -411,7 +418,8 @@
       "tags": [
         "家庭",
         "亲属关系"
-      ]
+      ],
+      "letter": "B"
     },
     {
       "id": "n-bisbaxil",
@@ -442,7 +450,8 @@
       "antonyms": [],
       "tags": [
         "动物"
-      ]
+      ],
+      "letter": "B"
     },
     {
       "id": "v-bofizo",
@@ -459,20 +468,20 @@
       "declension": {},
       "conjugation": {
         "直陈式现在时": {
-          "1sg": "bofizo",
+          "1sg": "bofiza",
           "2sg": "bofizas",
-          "3sg": "bofiza",
-          "1pl": "bofizame",
-          "2pl": "bofizaxe",
-          "3pl": "bofiza"
+          "3sg": "bofizat",
+          "1pl": "bofizamus",
+          "2pl": "bofizatis",
+          "3pl": "bofizant"
         },
         "直陈式过去时": {
-          "1sg": "bofizé",
-          "2sg": "bofizar",
-          "3sg": "bofiz ",
-          "1pl": "bofizam",
-          "2pl": "bofizer",
-          "3pl": "bofiz "
+          "1sg": "bofizaba",
+          "2sg": "bofizabas",
+          "3sg": "bofizabat",
+          "1pl": "bofizabamus",
+          "2pl": "bofizabatis",
+          "3pl": "bofizaband"
         },
         "直陈式将来时": {
           "1sg": "bofizabo",
@@ -483,16 +492,16 @@
           "3pl": "bofizabunt"
         },
         "虚拟式": {
-          "1sg": "bofizŭ",
-          "2sg": "bofize",
-          "3sg": "bofize",
-          "1pl": "bofizem",
-          "2pl": "bofizex",
-          "3pl": "bofize"
+          "1sg": "bofizem",
+          "2sg": "bofizes",
+          "3sg": "bofizet",
+          "1pl": "bofizemus",
+          "2pl": "bofizetis",
+          "3pl": "bofizent"
         },
         "命令式": {
           "2sg": "bofiza",
-          "2pl": "bofizaxi"
+          "2pl": "bofizate"
         },
         "非限定式": {
           "不定式": "bofizare",
@@ -516,7 +525,129 @@
       "tags": [
         "动物",
         "常用动词"
-      ]
+      ],
+      "letter": "B"
+    },
+    {
+      "id": "caper",
+      "word": "caper",
+      "pos": "n",
+      "translations": {
+        "zh": "子女；小孩",
+        "en": "child; kid",
+        "es": "hijos y hijas; niños y niñas"
+      },
+      "gender": "common",
+      "declension": {
+        "单数": {
+          "主格": "caper",
+          "属格": "caprŭs",
+          "宾格": "capren"
+        },
+        "复数": {
+          "主格": "capri",
+          "属格": "caprŭ",
+          "宾格": "capres"
+        }
+      },
+      "conjugation": {},
+      "etymology": [
+        {
+          "词源说明": "caper⁠ 衍生自 ⁠parica⁠ 的逆构词（回溯构词），继承了古乌纳提语形容词 ⁠παρίκας⁠（paríkas）的词义与词根."
+        }
+      ],
+      "examples": [
+        {
+          "Modern Inattian": "Eton ejis, caper?",
+          "zh": "孩子，你去哪儿了？",
+          "en": "where are you going, kid?",
+          "es": "A donde vas, hijo?"
+        }
+      ],
+      "synonyms": [],
+      "antonyms": [],
+      "tags": [
+        "亲属",
+        "关系"
+      ],
+      "image": "",
+      "letter": "C"
+    },
+    {
+      "id": "v-ciprehaxi",
+      "word": "cipreho",
+      "pos": "v",
+      "translations": {
+        "zh": "传达、传送、发送；传递；寄送",
+        "en": "to transmit; to send; to dispatch; to emit",
+        "es": "transmitir; radiodifundir; enviar; emitir "
+      },
+      "root": "cipreh",
+      "conj_pattern": "I",
+      "gender": "",
+      "declension": {},
+      "conjugation": {
+        "直陈式现在时": {
+          "1sg": "cipreha",
+          "2sg": "ciprehas",
+          "3sg": "ciprehat",
+          "1pl": "ciprehamus",
+          "2pl": "ciprehatis",
+          "3pl": "ciprehant"
+        },
+        "直陈式过去时": {
+          "1sg": "ciprehaba",
+          "2sg": "ciprehabas",
+          "3sg": "ciprehabat",
+          "1pl": "ciprehabamus",
+          "2pl": "ciprehabatis",
+          "3pl": "ciprehaband"
+        },
+        "直陈式将来时": {
+          "1sg": "ciprehabo",
+          "2sg": "ciprehabis",
+          "3sg": "ciprehabit",
+          "1pl": "ciprehabimus",
+          "2pl": "ciprehabitis",
+          "3pl": "ciprehabunt"
+        },
+        "虚拟式": {
+          "1sg": "ciprehem",
+          "2sg": "ciprehes",
+          "3sg": "ciprehet",
+          "1pl": "ciprehemus",
+          "2pl": "ciprehetis",
+          "3pl": "ciprehent"
+        },
+        "命令式": {
+          "2sg": "cipreha",
+          "2pl": "ciprehate"
+        },
+        "非限定式": {
+          "不定式": "ciprehare",
+          "动名词": "ciprehando",
+          "过去分词": "ciprehatum"
+        }
+      },
+      "etymology": [],
+      "examples": [
+        {
+          "Modern Inattian": " ",
+          "zh": " ",
+          "en": " ",
+          "es": " "
+        }
+      ],
+      "synonyms": [
+        " emitiu"
+      ],
+      "antonyms": [
+        " "
+      ],
+      "tags": [
+        " "
+      ],
+      "letter": "C"
     },
     {
       "id": "v-esse",
@@ -594,7 +725,8 @@
         "系动词",
         "不规则",
         "高频"
-      ]
+      ],
+      "letter": "E"
     }
   ]
 }
