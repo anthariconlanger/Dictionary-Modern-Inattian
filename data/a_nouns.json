@@ -16,8 +16,8 @@
     "conjugation": {},
     "etymology": [
       { "part": "apa-", "meaning": "向、往" },
-      { "part": "-tig-", "meaning": "遮住、保护（动词后缀）" },
-      { "part": "-a", "meaning": "名词后缀"}
+      { "part": "-tig-", "meaning": "遮住、保护" },
+      { "part": "-a", "meaning": "名词后缀" }
     ],
     "examples": [
       {
@@ -30,7 +30,7 @@
     "synonyms": [],
     "antonyms": [],
     "tags": ["人性", "情感"],
-    "image": "data/images/love.jpg.JPG"
+    "image": "data/images/love.jpg"
   },
   {
     "id": "n-aleska",
