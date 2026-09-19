@@ -1,1 +1,29 @@
-
+[
+  {
+    "id": "v-ciprehaxi",
+    "word": "cipreho",
+    "pos": "v",
+    "translations": {
+      "zh": "传达、传送、发送；传递；寄送",
+      "en": "to transmit; to send; to dispatch; to emit",
+      "es": "transmitir; radiodifundir; enviar; emitir "
+    },
+    "root": "cipreh",
+    "conj_pattern": "I",
+    "gender": "",
+    "declension": {},
+    "conjugation": {},
+    "etymology": [],
+    "examples": [
+      {
+        "Modern Inattian": " ",
+        "zh": " ",
+        "en": " ",
+        "es": " "
+      }
+    ],
+    "synonyms": [" emitiu"],
+    "antonyms": [" "],
+    "tags": [" "]
+  }
+]
