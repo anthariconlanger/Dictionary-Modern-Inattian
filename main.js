@@ -18,13 +18,15 @@
   const FETCH_TIMEOUT_MS = 8000;
 
   const POS_LABEL = { n: "名词", v: "动词", adj: "形容词" };
+  // 词性配色（跟卡片顶部色条、详情页词性徽标共用），取自 Total Violet 调色板
+  const POS_COLOR = { n: "var(--teal)", v: "var(--blue)", adj: "var(--pink)" };
 
   // 伊纳特语真实字母表（按你提供的顺序，不是拉丁字母顺序）。
   // 必须跟 make_index.py 里的 CUSTOM_ALPHABET 顺序完全一一对应，
   // 唯一区别是这里每个字母首字符大写、那边全小写。
   const ALPHABET = [
     "A", "Ă", "B", "C", "Ç", "D", "E", "F", "G", "H", "I", "Ŭ", "J", "K", "L",
-    "M", "N", "Ń", "O", "P", "Ž", "R", "S", "T", "X", "U", "V", "W", "Z", "Ź", 
+    "M", "N", "Ń", "O", "P", "Ž", "R", "S", "T", "X", "U", "V", "W", "Z",
   ];
 
   /** @type {{word:string,pos:string,[k:string]:any}[]} */
@@ -32,7 +34,8 @@
   let loadFailed = false;
 
   const state = {
-    letter: null,      // 当前选中的首字母，null = 全部
+    letter: null,      // 当前选中的首字母，null = 未选中具体字母
+    showAll: false,     // 是否已点击“全部”（或从字母分组返回全部）
     query: "",          // 当前搜索关键词
     detailId: null,     // 当前详情页词条 id，null = 未打开详情
     openPanels: new Set(), // 展开中的“变格/变位”面板（跨视图记忆展开状态）
@@ -49,11 +52,11 @@
     searchInput: document.getElementById("search-input"),
     searchClear: document.getElementById("search-clear"),
     breadcrumb: document.getElementById("breadcrumb"),
-    loadingIndicator: document.getElementById("loading-indicator"),
     statusBanner: document.getElementById("status-banner"),
     listMeta: document.getElementById("list-meta"),
     entryList: document.getElementById("entry-list"),
     entryDetail: document.getElementById("entry-detail"),
+    aboutCard: document.getElementById("about-card"),
   };
 
   // ------------------------------------------------------------------
@@ -144,7 +147,6 @@
       console.error("词典索引加载失败：", err);
     }
 
-    el.loadingIndicator.hidden = true;
     buildAlphabetNav();
     render();
   }
@@ -164,6 +166,7 @@
     resetBtn.textContent = "全部";
     resetBtn.addEventListener("click", () => {
       state.letter = null;
+      state.showAll = true;
       state.detailId = null;
       render();
     });
@@ -176,6 +179,7 @@
       if (!available.has(letter)) btn.disabled = true;
       btn.addEventListener("click", () => {
         state.letter = letter;
+        state.showAll = false;
         state.detailId = null;
         render();
       });
@@ -189,7 +193,7 @@
     const buttons = el.alphabetNav.querySelectorAll("button");
     buttons.forEach((btn) => {
       const isAll = btn.classList.contains("is-reset");
-      const isActive = isAll ? state.letter === null : btn.textContent === state.letter;
+      const isActive = isAll ? state.showAll === true : btn.textContent === state.letter;
       btn.classList.toggle("is-active", isActive);
     });
   }
@@ -281,8 +285,8 @@
     return `
       <div class="panel ${isOpen ? "is-open" : ""}" data-panel-entry="${escapeHtml(entry.id)}">
         <button type="button" class="panel__toggle" aria-expanded="${isOpen}" aria-controls="${panelId}">
+          <span class="panel__arrow">▶</span>
           <span>${title}</span>
-          <span class="panel__arrow">${isOpen ? "▼" : "▶"}</span>
         </button>
         <div class="panel__body" id="${panelId}"><div class="panel__body-inner">${body}</div></div>
       </div>`;
@@ -321,7 +325,7 @@
       : "";
 
     const headerWord = clickableHeader
-      ? `<button type="button" class="detail-card__word as-link" data-open-detail="${escapeHtml(entry.id)}" style="background:none;border:none;cursor:pointer;padding:0;">${escapeHtml(entry.word)}</button>`
+      ? `<button type="button" class="detail-card__word as-link" data-open-detail="${escapeHtml(entry.id)}">${escapeHtml(entry.word)}</button>`
       : `<h2 class="detail-card__word">${escapeHtml(entry.word)}</h2>`;
 
     const navHtml = clickableHeader ? "" : `
@@ -336,19 +340,26 @@
         </button>
       </nav>`;
 
+    const posColor = POS_COLOR[entry.pos] || "var(--blue)";
+
+    const imageHtml = entry.image
+      ? `<img class="detail-card__image" src="${escapeHtml(entry.image)}" alt="${escapeHtml(entry.word)}" loading="lazy">`
+      : "";
+
     return `
       <article class="detail-card" data-entry-card="${escapeHtml(entry.id)}">
+        ${imageHtml}
         <div class="detail-card__head">
           ${headerWord}
-          <span class="detail-card__pos">${POS_LABEL[entry.pos] || entry.pos}</span>
+          <span class="pos-badge" style="--pos-color:${posColor}">${POS_LABEL[entry.pos] || entry.pos}</span>
           ${entry.gender ? `<span class="detail-card__gender">${escapeHtml(entry.gender)}</span>` : ""}
         </div>
 
-        <dl class="translation-list">
-          <div><dt>中文</dt><dd>${escapeHtml(entry.translations?.zh || "—")}</dd></div>
-          <div><dt>English</dt><dd>${escapeHtml(entry.translations?.en || "—")}</dd></div>
-          <div><dt>Español</dt><dd>${escapeHtml(entry.translations?.es || "—")}</dd></div>
-        </dl>
+        <div class="gloss-lines">
+          ${entry.translations?.zh ? `<p class="gloss-lines__primary">${escapeHtml(entry.translations.zh)}</p>` : ""}
+          ${entry.translations?.en ? `<p class="gloss-lines__secondary"><b>EN</b>${escapeHtml(entry.translations.en)}</p>` : ""}
+          ${entry.translations?.es ? `<p class="gloss-lines__secondary"><b>ES</b>${escapeHtml(entry.translations.es)}</p>` : ""}
+        </div>
 
         <div class="detail-section">
           <h3>词源</h3>
@@ -369,13 +380,10 @@
   }
 
   function renderEntryListRow(entry, query) {
-    const gloss = [entry.translations?.zh, entry.translations?.en, entry.translations?.es]
-      .filter(Boolean).join(" / ");
+    const posColor = POS_COLOR[entry.pos] || "var(--blue)";
     return `
-      <button type="button" class="entry-row" data-open-detail="${escapeHtml(entry.id)}">
-        <span class="entry-row__word">${highlightHtml(entry.word, query)}</span>
-        <span class="entry-row__pos">${POS_LABEL[entry.pos] || entry.pos}</span>
-        <span class="entry-row__gloss">${highlightHtml(gloss, query)}</span>
+      <button type="button" class="entry-card" data-open-detail="${escapeHtml(entry.id)}" style="--card-accent:${posColor}">
+        <span class="entry-card__word">${highlightHtml(entry.word, query)}</span>
       </button>`;
   }
 
@@ -415,6 +423,7 @@
       el.entryList.hidden = false;
       el.entryList.innerHTML = "";
       el.entryDetail.hidden = true;
+      el.aboutCard.hidden = true;
       scrollToTopIfLevelChanged("error");
       return;
     }
@@ -427,6 +436,7 @@
       el.listMeta.hidden = true;
       el.entryList.hidden = true;
       el.entryDetail.hidden = false;
+      el.aboutCard.hidden = true;
       if (!entry) {
         el.entryDetail.innerHTML = `<p class="status-banner">未找到该词条，可能已被移除。</p>`;
       } else {
@@ -440,9 +450,21 @@
       return;
     }
 
+    // --- 中立态：还没点过任何字母 / “全部” / 搜索，只显示提示语和品牌卡片 ---
+    if (!state.letter && !state.showAll && !state.query) {
+      el.listMeta.hidden = true;
+      el.entryList.hidden = false;
+      el.entryList.innerHTML = `<p class="hint-text">选择上方字母浏览词条，或点击「全部」查看所有词条。</p>`;
+      el.entryDetail.hidden = true;
+      el.aboutCard.hidden = false;
+      scrollToTopIfLevelChanged("neutral");
+      return;
+    }
+
     // --- 列表页（首页 / 字母分组，可叠加搜索） ---
     el.entryDetail.hidden = true;
     el.entryList.hidden = false;
+    el.aboutCard.hidden = false;
 
     const byLetter = state.letter
       ? allEntries.filter((e) => firstLetter(e) === state.letter)
@@ -502,6 +524,7 @@
         state.detailId = null;
       } else if (backBtn.dataset.back === "letter") {
         state.letter = null;
+        state.showAll = true;
       }
       render();
       return;
@@ -521,8 +544,7 @@
       panelEl.classList.toggle("is-open");
       const expanded = panelEl.classList.contains("is-open");
       toggleBtn.setAttribute("aria-expanded", String(expanded));
-      const arrow = toggleBtn.querySelector(".panel__arrow");
-      if (arrow) arrow.textContent = expanded ? "▼" : "▶";
+      // 箭头始终是 ▶，展开时靠 CSS 旋转 90° 变成指向下方，不用切换字符
     }
   });
 

@@ -67,6 +67,30 @@ python -m http.server 8000
 只是占位示例，请按伊纳特语实际语法在 `make_index.py` 顶部的
 `REGULAR_PATTERNS` 中调整。
 
+**配图（可选字段）**：任何词性都可以加一个 `image` 字段，值是图片的相对
+路径字符串，例如：
+
+```json
+"image": "data/images/nigra-demo.jpg"
+```
+
+不需要配图就完全不写这个字段（或写 `null`）。图片文件本身放在
+`data/images/` 目录下，跟词条 JSON 一起提交即可；详情页会在词条最上方
+展示这张图。`data/images/nigra-demo.jpg` 目前是一张占位演示图，可以直接
+删掉或替换成你自己的图。
+
+## 网页视觉设计说明
+
+首页默认（还没点任何字母 / “全部”）只显示品牌卡片和一句提示语，不会
+列出词条——这是有意为之，不是数据没加载出来。点了具体字母或“全部”才会
+展示词条卡片网格。
+
+配色方案是 “Total Violet” 调色板（黄 `#F4C530`、粉 `#F39ABB`、
+红 `#E73245`、蓝 `#4169E2`、绿 `#00A692`），在 `style.css` 顶部
+`:root` 里定义为 CSS 变量，改配色只需要改这几行。背景是这五个颜色的
+Memphis 风格几何图案（`body` 的 `background-image`，一段 SVG data URI），
+底色可以单独通过 `--paper` / `--paper-deep` 系列变量调整，不影响图案本身。
+
 ## 部署到 GitHub Pages
 
 1. 新建仓库，将本项目全部文件推送上去（保留 `.github/workflows/` 目录）

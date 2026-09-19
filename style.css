@@ -1,47 +1,61 @@
 /* ==========================================================================
-   伊纳特语词典 · 视觉基调：一本被反复翻阅的语言学手册
-   纸张米黄 + 印章红（词头/强调）+ 深绿（次要强调，链接/同反义词）
+   伊纳特语词典 · 视觉基调：暖米色底 + 波点纹理 + Memphis 风格撞色卡片
+   配色来自 "Total Violet" 调色板：黄 / 粉 / 红 / 蓝 / 绿
    ========================================================================== */
 
 :root {
-  --paper: #eee7d4;
-  --paper-deep: #e2d8bd;
-  --paper-card: #f6f1e4;
-  --ink: #241f18;
-  --ink-soft: #5c5343;
-  --ink-faint: #8a8069;
-  --seal: #7c2e2e;
-  --seal-soft: #a8534f;
-  --botanical: #34503f;
-  --line: #cdc0a0;
-  --line-soft: #ddd2b6;
-  --shadow: rgba(36, 31, 24, 0.12);
+  --paper: #faf5e8;
+  --paper-deep: #f1e9d4;
+  --paper-card: rgba(255, 255, 255, 0.72);
+  --paper-card-glass: rgba(255, 255, 255, 0.32);
+  --paper-card-solid: #fffdf7;
+  --ink: #221f1a;
+  --ink-soft: #585244;
+  --ink-faint: #948c78;
+  --line: #e4d9bd;
+  --line-soft: #ece2c8;
+  --shadow: rgba(34, 31, 26, 0.14);
+
+  /* Total Violet 调色板 */
+  --yellow: #f4c530;
+  --pink: #f39abb;
+  --red: #e73245;
+  --blue: #4169e2;
+  --teal: #00a692;
+
+  /* 语义角色 */
+  --accent: var(--red);
+  --accent-soft: #f0616f;
+  --pos-n: var(--teal);
+  --pos-v: var(--blue);
+  --pos-adj: var(--pink);
 
   --font-display: "Iowan Old Style", "Palatino Linotype", Georgia, "Songti SC", serif;
   --font-ui: -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
   --font-form: "Courier New", ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  --radius: 3px;
+  --radius: 14px;
+  --radius-sm: 8px;
+  --card-border: rgba(255, 255, 255, 0.4);
 }
 
-/* 深色模式：跟随系统设置自动切换，色相保持一致，仅明度反转 */
 @media (prefers-color-scheme: dark) {
   :root {
-    --paper: #1c1a15;
-    --paper-deep: #26221a;
-    --paper-card: #221f19;
-    --ink: #ece4d0;
-    --ink-soft: #c3b89b;
-    --ink-faint: #8d8368;
-    --seal: #e2867f;
-    --seal-soft: #c76b62;
-    --botanical: #7fae93;
-    --line: #423d2d;
-    --line-soft: #363120;
-    --shadow: rgba(0, 0, 0, 0.45);
+    --paper: #1b1913;
+    --paper-deep: #24211a;
+    --paper-card: rgba(38, 34, 26, 0.72);
+    --paper-card-glass: rgba(38, 34, 26, 0.34);
+    --paper-card-solid: #211e17;
+    --ink: #f1ead6;
+    --ink-soft: #cabe9d;
+    --ink-faint: #928968;
+    --line: #3c3626;
+    --line-soft: #302b1e;
+    --shadow: rgba(0, 0, 0, 0.5);
+    --accent-soft: #ff8790;
+    --card-border: rgba(255, 255, 255, 0.08);
   }
 }
-
 * { box-sizing: border-box; }
 
 html { scroll-behavior: smooth; }
@@ -52,148 +66,142 @@ html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  background: var(--paper);
-  background-image:
-    radial-gradient(circle at 15% 0%, var(--paper-deep) 0%, transparent 45%),
-    radial-gradient(circle at 100% 30%, var(--paper-deep) 0%, transparent 40%);
+  background-color: var(--paper);
+  /* Memphis 风格几何图案密铺，取自 Total Violet 调色板，低透明度作为底纹 */
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22260%22%20height%3D%22260%22%20viewBox%3D%220%200%20260%20260%22%3E%0A%20%20%3Ccircle%20cx%3D%2234%22%20cy%3D%2240%22%20r%3D%2214%22%20fill%3D%22%23F4C530%22%20fill-opacity%3D%220.22%22/%3E%0A%20%20%3Cpolygon%20points%3D%22150%2C26%20182%2C50%20150%2C74%22%20fill%3D%22%234169E2%22%20fill-opacity%3D%220.18%22/%3E%0A%20%20%3Cg%20fill%3D%22%23F39ABB%22%20fill-opacity%3D%220.28%22%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22222%22%20cy%3D%2246%22%20r%3D%223%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22236%22%20cy%3D%2246%22%20r%3D%223%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22222%22%20cy%3D%2260%22%20r%3D%223%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22236%22%20cy%3D%2260%22%20r%3D%223%22/%3E%0A%20%20%3C/g%3E%0A%20%20%3Cpath%20d%3D%22M20%20150%20l10%20-10%20l10%2010%20l10%20-10%20l10%2010%22%20stroke%3D%22%2300A692%22%20stroke-width%3D%223%22%20fill%3D%22none%22%20stroke-opacity%3D%220.22%22%20stroke-linecap%3D%22round%22/%3E%0A%20%20%3Cpath%20d%3D%22M130%20180%20a26%2026%200%200%201%2052%200%20Z%22%20fill%3D%22%23E73245%22%20fill-opacity%3D%220.14%22/%3E%0A%20%20%3Cline%20x1%3D%2290%22%20y1%3D%22210%22%20x2%3D%22130%22%20y2%3D%22230%22%20stroke%3D%22%23221F1A%22%20stroke-opacity%3D%220.08%22%20stroke-width%3D%222%22/%3E%0A%20%20%3Ccircle%20cx%3D%22210%22%20cy%3D%22170%22%20r%3D%225%22%20fill%3D%22%234169E2%22%20fill-opacity%3D%220.20%22/%3E%0A%3C/svg%3E");
+  background-size: 260px 260px;
   color: var(--ink);
   font-family: var(--font-ui);
   line-height: 1.55;
   min-height: 100vh;
 }
 
-a { color: var(--botanical); }
+a { color: var(--accent); }
 
 /* ---------------------------- 顶部区域 ---------------------------- */
 
 .site-header {
-  padding: 2.25rem 1.5rem 1.25rem;
+  padding: 2rem 1.5rem 1.1rem;
   max-width: 860px;
   margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 1rem;
-  border-bottom: 1px solid var(--line);
 }
 
 .site-header__title h1 {
   font-family: var(--font-display);
-  font-size: clamp(1.6rem, 4vw, 2.2rem);
-  font-weight: 600;
+  font-size: clamp(1.7rem, 4.5vw, 2.3rem);
+  font-weight: 700;
   margin: 0;
   color: var(--ink);
-  letter-spacing: 0.01em;
 }
 
 .site-header__subtitle {
-  margin: 0.2rem 0 0;
+  margin: 0.2rem 0 1.1rem;
   color: var(--ink-faint);
   font-style: italic;
   font-family: var(--font-display);
-  font-size: 0.95rem;
+  font-size: 0.98rem;
 }
 
 .search-box {
   position: relative;
-  flex: 1 1 260px;
-  max-width: 360px;
+  max-width: 480px;
 }
 
 #search-input {
   width: 100%;
-  padding: 0.6rem 2.1rem 0.6rem 0.8rem;
+  padding: 0.75rem 2.3rem 0.75rem 1rem;
   border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--paper-card);
+  border-radius: 999px;
+  background: var(--paper-card-solid);
   color: var(--ink);
   font-family: var(--font-ui);
   font-size: 0.95rem;
+  box-shadow: 0 2px 8px var(--shadow);
 }
+
+#search-input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+#search-input::placeholder { color: var(--ink-faint); }
 
 .search-clear {
   position: absolute;
-  right: 0.4rem;
+  right: 0.6rem;
   top: 50%;
   transform: translateY(-50%);
-  width: 1.6rem;
-  height: 1.6rem;
+  width: 1.7rem;
+  height: 1.7rem;
   border: none;
   background: none;
   color: var(--ink-faint);
-  font-size: 1.3rem;
+  font-size: 1.35rem;
   line-height: 1;
   cursor: pointer;
   border-radius: 50%;
 }
 
-.search-clear:hover { color: var(--seal); }
-.search-clear:focus-visible { outline: 2px solid var(--seal); }
+.search-clear:hover { color: var(--accent); }
+.search-clear:focus-visible { outline: 2px solid var(--accent); }
 
-/* 搜索/列表关键词高亮 */
 mark {
-  background: rgba(124, 46, 46, 0.18);
+  background: #f9dd8f;
+  background: color-mix(in srgb, var(--yellow) 55%, transparent);
   color: inherit;
   border-radius: 2px;
   padding: 0 0.05em;
 }
-
-#search-input:focus-visible {
-  outline: 2px solid var(--seal);
-  outline-offset: 1px;
-}
-
-#search-input::placeholder { color: var(--ink-faint); }
 
 /* ---------------------------- 字母导航 ---------------------------- */
 
 .alphabet-nav {
   max-width: 860px;
   margin: 0 auto;
-  padding: 0.9rem 1.5rem;
+  padding: 1rem 1.5rem 0.5rem;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.35rem;
+  gap: 0.7rem 0.9rem;
+  font-family: var(--font-display);
 }
 
 .alphabet-nav button {
-  border: 1px solid var(--line);
-  background: var(--paper-card);
-  color: var(--ink-soft);
-  font-family: var(--font-form);
-  font-size: 0.85rem;
-  width: 2rem;
-  height: 2rem;
-  border-radius: var(--radius);
+  border: none;
+  background: none;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 1.02rem;
+  font-weight: 600;
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 50%;
   cursor: pointer;
-  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  transition: background 0.15s ease, color 0.15s ease;
 }
 
 .alphabet-nav button.is-reset {
   width: auto;
-  padding: 0 0.7rem;
-  font-family: var(--font-ui);
+  padding: 0 0.6rem;
+  border-radius: 999px;
 }
 
-.alphabet-nav button:hover {
-  border-color: var(--seal-soft);
-  color: var(--seal);
+.alphabet-nav button:hover:not(:disabled) {
+  color: var(--accent);
 }
 
 .alphabet-nav button:focus-visible {
-  outline: 2px solid var(--seal);
+  outline: 2px solid var(--accent);
   outline-offset: 1px;
 }
 
 .alphabet-nav button.is-active {
-  background: var(--seal);
-  border-color: var(--seal);
-  color: #fbf6ea;
+  background: var(--accent);
+  color: #fff;
 }
 
 .alphabet-nav button:disabled {
-  opacity: 0.35;
+  color: var(--ink-faint);
+  opacity: 0.55;
   cursor: default;
 }
 
@@ -206,187 +214,198 @@ mark {
   min-height: 40vh;
 }
 
-.breadcrumb {
-  margin: 0.5rem 0 1rem;
-}
+.breadcrumb { margin: 0.7rem 0 1rem; }
 
 .breadcrumb button {
   background: none;
   border: none;
-  color: var(--botanical);
+  color: var(--accent);
   font-family: var(--font-ui);
+  font-weight: 600;
   font-size: 0.92rem;
   cursor: pointer;
   padding: 0.2rem 0;
 }
 
 .breadcrumb button:hover { text-decoration: underline; }
-.breadcrumb button:focus-visible { outline: 2px solid var(--seal); }
+.breadcrumb button:focus-visible { outline: 2px solid var(--accent); }
 
 /* ---------------------------- 加载状态 ---------------------------- */
-
-.loading-indicator {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  color: var(--ink-faint);
-  font-style: italic;
-  padding: 2rem 0;
-}
-
-.loading-indicator__spinner {
-  width: 1rem;
-  height: 1rem;
-  border: 2px solid var(--line);
-  border-top-color: var(--seal);
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-  flex-shrink: 0;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
 
 .list-meta {
   color: var(--ink-faint);
   font-size: 0.85rem;
-  margin: 0 0 0.7rem;
+  margin: 0 0 0.9rem;
 }
 
 .status-banner {
   border: 1px solid var(--line);
-  background: var(--paper-card);
-  border-left: 3px solid var(--seal);
+  background: var(--paper-card-solid);
+  border-left: 3px solid var(--accent);
   padding: 0.9rem 1.1rem;
-  border-radius: var(--radius);
+  border-radius: var(--radius-sm);
   color: var(--ink-soft);
   margin: 1rem 0;
 }
 
-.status-banner.is-empty {
-  border-left-color: var(--ink-faint);
+.status-banner.is-empty { border-left-color: var(--ink-faint); }
+
+/* 这两类提示是插进 .entry-list 这个 grid 容器里的，得跨满整行，
+   不然会被网格列宽挤成一条窄栏 */
+.entry-list > .status-banner {
+  grid-column: 1 / -1;
 }
 
-/* ---------------------------- 词条列表（首页 / 字母分组） ---------------------------- */
+.hint-text {
+  grid-column: 1 / -1;
+  color: var(--ink-faint);
+  font-style: italic;
+  font-family: var(--font-display);
+  text-align: center;
+  padding: 1.6rem 1rem;
+}
+
+/* ---------------------------- 词条列表：卡片网格 ---------------------------- */
 
 .entry-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.9rem;
 }
 
-.entry-row {
+.entry-card {
+  position: relative;
   display: flex;
-  align-items: baseline;
-  gap: 0.75rem;
-  padding: 0.7rem 0.9rem;
-  background: var(--paper-card);
-  border: 1px solid var(--line-soft);
-  border-radius: var(--radius);
+  align-items: center;
+  justify-content: center;
+  min-height: 84px;
+  padding: 1rem 0.8rem;
+  text-align: center;
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-sm);
+  background: var(--paper-card-glass);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 6px 14px var(--shadow);
   cursor: pointer;
-  text-align: left;
-  width: 100%;
-  font-family: var(--font-ui);
-  color: var(--ink);
-  transition: border-color 0.15s ease, transform 0.1s ease;
-}
-
-.entry-row:hover {
-  border-color: var(--seal-soft);
-}
-
-.entry-row:focus-visible {
-  outline: 2px solid var(--seal);
-  outline-offset: 1px;
-}
-
-.entry-row__word {
   font-family: var(--font-display);
-  font-size: 1.12rem;
+  color: var(--ink);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* 静止状态保持透明磨砂玻璃质感，不分词性上色；
+   点击/按下/悬停时才亮出对应词性的颜色，作为交互反馈 */
+.entry-card:hover,
+.entry-card:active {
+  transform: translateY(-2px);
+  box-shadow: 0 0 0 2px var(--card-accent, var(--accent)), 0 10px 20px var(--shadow);
+}
+
+.entry-card:active {
+  transform: translateY(0);
+}
+
+.entry-card:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.entry-card__word {
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+/* ---------------------------- 词性徽标（详情页） ---------------------------- */
+
+.pos-badge {
+  display: inline-block;
+  padding: 0.2rem 0.75rem;
+  border-radius: 999px;
+  color: #fff;
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
   font-weight: 600;
-  color: var(--seal);
-  flex-shrink: 0;
-}
-
-.entry-row__pos {
-  font-family: var(--font-form);
-  font-size: 0.78rem;
-  color: var(--ink-faint);
-  flex-shrink: 0;
-}
-
-.entry-row__gloss {
-  color: var(--ink-soft);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  background: var(--pos-color, var(--blue));
 }
 
 /* ---------------------------- 词条详情卡片 ---------------------------- */
 
 .detail-card {
   background: var(--paper-card);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   border: 1px solid var(--line-soft);
   border-radius: var(--radius);
-  padding: 1.5rem 1.6rem;
-  box-shadow: 0 6px 18px var(--shadow);
+  padding: 1.6rem 1.7rem;
+  box-shadow: 0 10px 24px var(--shadow);
 }
 
 .detail-card__head {
   display: flex;
   align-items: baseline;
-  gap: 0.85rem;
+  gap: 0.9rem;
   flex-wrap: wrap;
-  border-bottom: 1px solid var(--line);
-  padding-bottom: 0.9rem;
-  margin-bottom: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.detail-card__image {
+  display: block;
+  width: 100%;
+  max-height: 320px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  margin-bottom: 1.2rem;
 }
 
 .detail-card__word {
   font-family: var(--font-display);
-  font-size: 2rem;
+  font-size: 2.1rem;
+  font-weight: 700;
   color: var(--ink);
   margin: 0;
 }
 
-.detail-card__pos {
-  font-family: var(--font-form);
-  color: var(--seal);
-  background: rgba(124, 46, 46, 0.08);
-  padding: 0.15rem 0.5rem;
-  border-radius: var(--radius);
-  font-size: 0.85rem;
+.detail-card__word.as-link {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
 }
 
 .detail-card__gender {
   font-family: var(--font-form);
-  color: var(--botanical);
+  color: var(--teal);
   font-size: 0.85rem;
 }
 
-.translation-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 0.5rem 1.2rem;
-  margin: 0 0 1.1rem;
+.gloss-lines {
+  margin: 0 0 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
 }
 
-.translation-list dt {
-  font-family: var(--font-form);
-  font-size: 0.72rem;
+.gloss-lines__primary {
+  font-size: 1.08rem;
+  color: var(--ink);
+}
+
+.gloss-lines__secondary {
+  color: var(--ink-soft);
+  font-size: 0.96rem;
+}
+
+.gloss-lines__secondary b {
   color: var(--ink-faint);
-  margin: 0;
+  font-family: var(--font-form);
+  font-weight: 600;
+  font-size: 0.78rem;
+  margin-right: 0.35em;
 }
 
-.translation-list dd {
-  margin: 0;
-  font-size: 1.02rem;
-}
-
-.detail-section {
-  margin: 1.1rem 0;
-}
+.detail-section { margin: 1.1rem 0; }
 
 .detail-section h3 {
   font-family: var(--font-display);
@@ -402,9 +421,7 @@ mark {
   padding-left: 1.1rem;
 }
 
-.example-item {
-  margin-bottom: 0.6rem;
-}
+.example-item { margin-bottom: 0.6rem; }
 
 .example-item__source {
   font-family: var(--font-display);
@@ -425,47 +442,44 @@ mark {
 
 .tag-pill {
   border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  padding: 0.15rem 0.7rem;
   font-size: 0.8rem;
   color: var(--ink-soft);
+  background: var(--paper-deep);
 }
 
 /* ---------------------------- 折叠面板（变格 / 变位） ---------------------------- */
 
 .panel {
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  margin-top: 1rem;
-  overflow: hidden;
+  margin-top: 1.2rem;
+  border-top: 1px dashed var(--line);
+  padding-top: 0.9rem;
 }
 
 .panel__toggle {
-  width: 100%;
-  text-align: left;
-  background: var(--paper-deep);
   border: none;
-  padding: 0.65rem 0.9rem;
+  background: none;
+  padding: 0;
   cursor: pointer;
-  font-family: var(--font-ui);
-  font-weight: 600;
-  color: var(--ink);
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 0.5rem;
+  color: var(--accent);
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 0.98rem;
 }
 
-.panel__toggle:focus-visible {
-  outline: 2px solid var(--seal);
-  outline-offset: -2px;
-}
+.panel__toggle:focus-visible { outline: 2px solid var(--accent); }
 
 .panel__arrow {
-  font-family: var(--font-form);
-  color: var(--seal);
-  flex-shrink: 0;
+  display: inline-flex;
+  color: var(--accent);
+  transition: transform 0.2s ease;
 }
+
+.panel.is-open .panel__arrow { transform: rotate(90deg); }
 
 .panel__body {
   display: grid;
@@ -473,14 +487,12 @@ mark {
   transition: grid-template-rows 0.25s ease;
 }
 
-.panel.is-open .panel__body {
-  grid-template-rows: 1fr;
-}
+.panel.is-open .panel__body { grid-template-rows: 1fr; }
 
 .panel__body-inner {
   overflow: hidden;
   min-height: 0;
-  padding: 0.9rem;
+  padding-top: 0.9rem;
 }
 
 .form-table {
@@ -488,6 +500,7 @@ mark {
   border-collapse: collapse;
   font-family: var(--font-form);
   font-size: 0.9rem;
+  margin-bottom: 0.9rem;
 }
 
 .form-table caption {
@@ -519,7 +532,7 @@ mark {
   display: flex;
   justify-content: space-between;
   gap: 0.6rem;
-  margin-top: 1.1rem;
+  margin-top: 1.3rem;
 }
 
 .detail-nav button {
@@ -529,18 +542,17 @@ mark {
   gap: 0.15rem;
   border: 1px solid var(--line-soft);
   background: var(--paper-deep);
-  border-radius: var(--radius);
-  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-sm);
+  padding: 0.55rem 0.8rem;
   cursor: pointer;
   font-family: var(--font-ui);
   color: var(--ink-soft);
 }
 
 .detail-nav button:last-child { align-items: flex-end; text-align: right; }
-
-.detail-nav button:hover:not(:disabled) { border-color: var(--seal-soft); }
-.detail-nav button:focus-visible { outline: 2px solid var(--seal); }
-.detail-nav button:disabled { opacity: 0.35; cursor: default; }
+.detail-nav button:hover:not(:disabled) { color: var(--accent); }
+.detail-nav button:focus-visible { outline: 2px solid var(--accent); }
+.detail-nav button:disabled { opacity: 0.4; cursor: default; }
 
 .detail-nav__label {
   font-size: 0.72rem;
@@ -549,12 +561,49 @@ mark {
 
 .detail-nav__word {
   font-family: var(--font-display);
-  color: var(--seal);
+  font-weight: 700;
   font-size: 1.02rem;
   max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+/* ---------------------------- 品牌信息卡（列表页底部固定展示） ---------------------------- */
+
+.about-card {
+  margin-top: 2rem;
+  background: var(--paper-card-solid);
+  border-radius: var(--radius);
+  padding: 2rem 1.8rem;
+  text-align: center;
+  box-shadow: 0 8px 20px var(--shadow);
+}
+
+.about-card__title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 800;
+  font-size: 2rem;
+  color: var(--accent);
+  margin: 0 0 1rem;
+}
+
+.about-card__text {
+  color: var(--ink-soft);
+  max-width: 560px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+.about-card__deco {
+  margin-top: 1.5rem;
+}
+
+.about-card__deco svg {
+  width: 100%;
+  max-width: 320px;
+  height: auto;
 }
 
 /* ---------------------------- 页脚 ---------------------------- */
@@ -570,16 +619,18 @@ mark {
   font-family: var(--font-form);
   background: var(--paper-deep);
   padding: 0.05rem 0.35rem;
-  border-radius: var(--radius);
+  border-radius: var(--radius-sm);
 }
 
 /* ---------------------------- 移动端适配 ---------------------------- */
 
 @media (max-width: 560px) {
-  .site-header { padding: 1.5rem 1rem 1rem; }
+  .site-header { padding: 1.5rem 1rem 0.8rem; }
   #app-main { padding: 0.5rem 1rem 2.5rem; }
-  .alphabet-nav { padding: 0.75rem 1rem; }
-  .detail-card { padding: 1.1rem 1.1rem; }
-  .detail-card__word { font-size: 1.6rem; }
-  .entry-row__gloss { white-space: normal; }
+  .alphabet-nav { padding: 0.75rem 1rem 0.3rem; gap: 0.5rem 0.6rem; }
+  .detail-card { padding: 1.2rem 1.2rem; }
+  .detail-card__word { font-size: 1.7rem; }
+  .about-card { padding: 1.6rem 1.2rem; }
+  .about-card__title { font-size: 1.6rem; }
+  .entry-list { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); }
 }

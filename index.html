@@ -29,14 +29,27 @@
 
 <main id="app-main">
   <div id="breadcrumb" class="breadcrumb" hidden></div>
-  <div id="loading-indicator" class="loading-indicator">
-    <span class="loading-indicator__spinner" aria-hidden="true"></span>
-    正在加载词典…
-  </div>
   <div id="status-banner" class="status-banner" hidden></div>
   <p id="list-meta" class="list-meta" hidden></p>
   <div id="entry-list" class="entry-list"></div>
   <div id="entry-detail" class="entry-detail" hidden></div>
+
+  <section id="about-card" class="about-card">
+    <h2 class="about-card__title">Modern Inattian</h2>
+    <p class="about-card__text">
+      伊纳特语在线词典，收录名词、动词、形容词等词条，提供中、英、西三语释义与变格变位。
+      词条由本地 JSON 源文件与 make_index.py 自动生成，本页为只读静态阅读器。
+    </p>
+    <div class="about-card__deco" aria-hidden="true">
+      <svg viewBox="0 0 320 120" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="40" cy="60" r="26" style="fill:var(--yellow)"></circle>
+        <polygon points="100,30 140,60 100,90" style="fill:var(--blue)"></polygon>
+        <circle cx="200" cy="40" r="16" style="fill:var(--pink)"></circle>
+        <path d="M240 90 a30 30 0 0 1 60 0 Z" style="fill:var(--teal)"></path>
+        <rect x="270" y="20" width="24" height="24" style="fill:var(--red)" transform="rotate(20 282 32)"></rect>
+      </svg>
+    </div>
+  </section>
 </main>
 
 <footer class="site-footer">
