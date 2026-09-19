@@ -10,7 +10,10 @@
       "复数": { "主格": "capri", "属格": "caprŭ", "宾格": "capres" }
     },
     "conjugation": {},
-    "etymology": [词源说明：⁠caper⁠ 衍生自 ⁠parica⁠ 的逆构词（回溯构词），继承了古乌纳提语形容词 ⁠παρίκας⁠（paríkas）的词义与词根。], 
+    "etymology": [ 
+       {"词源说明：⁠caper⁠ 衍生自 ⁠parica⁠ 的逆构词（回溯构词），继承了古乌纳提语形容词 ⁠παρίκας⁠（paríkas）的词义与词根."
+       },
+       ], 
      "examples": [
       {
       "Modern Inattian": "Eton ejis, caper?"
