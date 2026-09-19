@@ -1,2 +1,27 @@
 [
+  {
+    "id": "caper",
+    "word": "caper",
+    "pos": "n",
+    "translations": { "zh": "子女；小孩", "en": "child; kid", "es": "hijos y hijas; niños y niñas" },
+    "gender": "common",
+    "declension": {
+      "单数": { "主格": "caper", "属格": "caprŭs", "宾格": "capren" },
+      "复数": { "主格": "capri", "属格": "caprŭ", "宾格": "capres" }
+    },
+    "conjugation": {},
+    "etymology": [词源说明：⁠caper⁠ 衍生自 ⁠parica⁠ 的逆构词（回溯构词），继承了古乌纳提语形容词 ⁠παρίκας⁠（paríkas）的词义与词根。], 
+     "examples": [
+      {
+      "Modern Inattian": "Eton ejis, caper?"
+      "zh": "孩子，你去哪儿了？"
+      "en": "where are you going, kid?"
+      "es": "A donde vas, hijo?"
+     }
+  ],
+      "synonyms": [], 
+      "antonyms": [],
+      "tags": ["亲属", "关系"], 
+      "image": ""
+  }
 ]
