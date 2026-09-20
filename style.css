@@ -353,8 +353,8 @@ mark {
   top: 1.6rem;         /* 距离顶部距离 */
   right: 1.7rem;       /* 距离右侧距离 */
   display: block;
-  width: 80px;
-  height: 80px;        /* 建议把 max-height 改为 height: 80px; 保持正方形 */
+  width: 250px;
+  height: 250px;        /* 建议把 max-height 改为 height: 80px; 保持正方形 */
   object-fit: cover;   /* contain 会留白，改成 cover 会填满 80x80 */
   border-radius: var(--radius-sm);
   margin-bottom: 0;
