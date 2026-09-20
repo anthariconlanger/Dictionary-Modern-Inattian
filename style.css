@@ -331,6 +331,7 @@ mark {
 /* ---------------------------- 词条详情卡片 ---------------------------- */
 
 .detail-card {
+  position: relative;
   background: var(--paper-card);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
@@ -347,16 +348,17 @@ mark {
   flex-wrap: wrap;
   margin-bottom: 1rem;
 }
-
 .detail-card__image {
+  position: absolute; /* 加上绝对定位 */
+  top: 1.6rem;         /* 距离顶部距离 */
+  right: 1.7rem;       /* 距离右侧距离 */
   display: block;
   width: 80px;
-  max-height: 80px;
-  object-fit: contain;
+  height: 80px;        /* 建议把 max-height 改为 height: 80px; 保持正方形 */
+  object-fit: cover;   /* contain 会留白，改成 cover 会填满 80x80 */
   border-radius: var(--radius-sm);
   margin-bottom: 0;
 }
-
 .detail-card__word {
   font-family: var(--font-display);
   font-size: 2.1rem;
