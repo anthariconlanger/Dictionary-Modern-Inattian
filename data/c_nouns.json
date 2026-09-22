@@ -25,6 +25,6 @@
      "synonyms": [], 
       "antonyms": [],
       "tags": ["亲属", "关系"], 
-      "image": ["data/images/child.jpg"]
+      "image": "data/images/child.jpg"
   }
 ]
