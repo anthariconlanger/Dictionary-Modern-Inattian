@@ -45,7 +45,7 @@ VALID_GENDER = {"common", "neutral"}
 
 CUSTOM_ALPHABET = [
     "a", "ă", "b", "c", "ç", "d", "e", "f", "g", "h", "i", "ŭ", "j", "k", "l",
-    "m", "n", "ń", "o", "p", "ž", "r", "s", "t", "x", "u", "v", "w", "z", "ź", 
+    "m", "n", "ń", "o", "p", "ž", "r", "s", "t", "x", "u", "v", "w", "z",
 ]
 LETTER_RANK = {letter: idx for idx, letter in enumerate(CUSTOM_ALPHABET)}
 # 多字符字母（如果以后字母表里又加入类似 "th" 的复合字母）按长度从长到短
@@ -159,6 +159,14 @@ def validate_entry(entry: Dict[str, Any], file: Path, idx: int) -> None:
     if not isinstance(entry["tags"], list):
         raise ValidationError(file, f"{where} 的 tags 必须是数组（可为空 []）")
 
+    # image 是可选字段（配图），不填就不显示；填了必须是非空字符串路径
+    if "image" in entry and entry["image"] is not None:
+        if not isinstance(entry["image"], str) or not entry["image"].strip():
+            raise ValidationError(
+                file, f"{where}（{entry.get('word')}）image 字段必须是非空字符串路径，"
+                f"或者干脆不写这个字段"
+            )
+
     if pos in ("n", "adj"):
         if "gender" not in entry or entry["gender"] not in VALID_GENDER:
             raise ValidationError(
@@ -180,6 +188,15 @@ def validate_entry(entry: Dict[str, Any], file: Path, idx: int) -> None:
                 f"{where}（{entry.get('word')}）动词源文件的 conjugation 必须保持空对象 {{}}，"
                 f"完整变位由脚本计算生成",
             )
+        # infinitive 是可选字段：手动指定这个动词“真正的口语不定式”（pa + 虚拟式1sg
+        # 那种），只在自动算出来的不对、需要手动改写例外时才写；不写就用自动算的。
+        # 跟书面语不定式（查 REGULAR_PATTERNS / IRREGULAR_VERBS 表）是两回事，互不影响。
+        if "infinitive" in entry and entry["infinitive"] is not None:
+            if not isinstance(entry["infinitive"], str) or not entry["infinitive"].strip():
+                raise ValidationError(
+                    file, f"{where}（{entry.get('word')}）infinitive 字段必须是非空字符串，"
+                    f"或者干脆不写这个字段"
+                )
 
 
 def load_and_validate_all() -> List[Dict[str, Any]]:
@@ -232,6 +249,14 @@ def load_and_validate_all() -> List[Dict[str, Any]]:
 #
 # 这里内置的规则表是一套“默认占位规则”，请按照伊纳特语实际语法在下方两张表中调整——
 # 结构（直陈式 / 虚拟式 / 命令式 / 非限定式）不需要改，改的是后缀本身。
+#
+# 关于“不定式”：这里的两张表里写的“不定式”其实是书面语用法，会被自动改名成
+# “不定式（书面语）”；真正口语里用的不定式是 PA_PARTICLE（助词 pa）+ 该动词
+# 虚拟式现在时第一人称单数，在 conjugate_verb() 里自动算出来，不用在表里填。
+# 极少数动词如果这个自动算出来的“真不定式”不对，可以在词条 JSON 里单独写一个
+# "infinitive" 字段手动覆盖（不写就用自动算的）。
+
+PA_PARTICLE = "pa"  # 口语不定式迂说结构用的助词；这个助词本身拼写变了，改这一处就行
 
 PERSONS = ["1sg", "2sg", "3sg", "1pl", "2pl", "3pl"]
 
@@ -342,20 +367,39 @@ def conjugate_verb(entry: Dict[str, Any]) -> Dict[str, Any]:
                 f"动词 “{word}”（root={root!r}）标记为 irregular，"
                 f"但 IRREGULAR_VERBS 中找不到对应词根，请在 make_index.py 中补充"
             )
-        return copy.deepcopy(table)
-
-    rules = REGULAR_PATTERNS.get(pattern)
-    if rules is None:
-        raise ConjugationError(
-            f"动词 “{word}” 的 conj_pattern “{pattern}” 未知，"
-            f"可用值：{sorted(REGULAR_PATTERNS)} 或 irregular"
-        )
-
-    conjugation: Dict[str, Any] = {}
-    for tense, forms in rules.items():
-        conjugation[tense] = {
-            person: f"{root}{suffix}" for person, suffix in forms.items()
+        conjugation = copy.deepcopy(table)
+    else:
+        rules = REGULAR_PATTERNS.get(pattern)
+        if rules is None:
+            raise ConjugationError(
+                f"动词 “{word}” 的 conj_pattern “{pattern}” 未知，"
+                f"可用值：{sorted(REGULAR_PATTERNS)} 或 irregular"
+            )
+        conjugation = {
+            tense: {person: f"{root}{suffix}" for person, suffix in forms.items()}
+            for tense, forms in rules.items()
         }
+
+    # ---- 不定式：口语真不定式（pa + 虚拟式1sg，自动算） vs 书面语不定式（查表） ----
+    old_non_finite = conjugation.get("非限定式", {})
+    literary_infinitive = old_non_finite.get("不定式")
+    other_forms = {k: v for k, v in old_non_finite.items() if k != "不定式"}
+
+    subjunctive_1sg = conjugation.get("虚拟式", {}).get("1sg")
+    custom_infinitive = entry.get("infinitive")
+    real_infinitive = custom_infinitive or (
+        f"{PA_PARTICLE} {subjunctive_1sg}" if subjunctive_1sg else None
+    )
+
+    new_non_finite: Dict[str, str] = {}
+    if real_infinitive:
+        new_non_finite["不定式"] = real_infinitive
+    if literary_infinitive:
+        new_non_finite["不定式（书面语）"] = literary_infinitive
+    new_non_finite.update(other_forms)
+
+    conjugation["非限定式"] = new_non_finite
+
     return conjugation
 
 
