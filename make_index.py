@@ -44,7 +44,7 @@ VALID_GENDER = {"common", "neutral"}
 # --------------------------------------------------------------------------
 
 CUSTOM_ALPHABET = [
-    "a", "ă", "b", "c", "ç", "d", "e", "f", "g", "h", "i", "ŭ", "j", "k", "l",
+    "a", "ä", "b", "c", "ç", "d", "e", "f", "g", "h", "i", "ü", "j", "k", "l",
     "m", "n", "ń", "o", "p", "ž", "r", "s", "t", "x", "u", "v", "w", "z",
 ]
 LETTER_RANK = {letter: idx for idx, letter in enumerate(CUSTOM_ALPHABET)}
